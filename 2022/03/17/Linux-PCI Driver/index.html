@@ -23,7 +23,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"angiean7.github.io","root":"/","language":"en"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#B5A2B7","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/wave.svg","description":"Happiness is a dancing dog."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":false},"style":{"primary_color":"#B5A2B7","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/wave.svg","description":"Happiness is a dancing dog."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
   </script>
 <meta name="generator" content="Hexo 5.4.1"></head>
@@ -143,8 +143,6 @@
                     <div class="author">
                         <span class="name">Angie An</span>
                         
-                            <span class="author-label">Lv1</span>
-                        
                     </div>
                     <div class="meta-info">
                         <div class="article-meta-info">
@@ -226,7 +224,14 @@
 <p>Enable DMA/processing engines</p>
 </li>
 </ul>
-<h4 id="4-1-Enable-the-device"><a href="#4-1-Enable-the-device" class="headerlink" title="4.1 Enable the device"></a>4.1 Enable the device</h4><h4 id="4-2-Request-MMIO-IOP-resources"><a href="#4-2-Request-MMIO-IOP-resources" class="headerlink" title="4.2 Request MMIO/IOP resources"></a>4.2 Request MMIO/IOP resources</h4><h4 id="4-3-Set-the-DMA-mask-size"><a href="#4-3-Set-the-DMA-mask-size" class="headerlink" title="4.3 Set the DMA mask size"></a>4.3 Set the DMA mask size</h4><h4 id="4-4-Allocate-and-initialize-shared-control-data"><a href="#4-4-Allocate-and-initialize-shared-control-data" class="headerlink" title="4.4 Allocate and initialize shared control data"></a>4.4 Allocate and initialize shared control data</h4><h4 id="4-5-Access-device-configuration-space"><a href="#4-5-Access-device-configuration-space" class="headerlink" title="4.5 Access device configuration space"></a>4.5 Access device configuration space</h4><h4 id="4-6-Register-IRQ-handler"><a href="#4-6-Register-IRQ-handler" class="headerlink" title="4.6 Register IRQ handler"></a>4.6 Register IRQ handler</h4><h4 id="4-7-Initialize-non-PCI"><a href="#4-7-Initialize-non-PCI" class="headerlink" title="4.7 Initialize non-PCI"></a>4.7 Initialize non-PCI</h4>
+<h4 id="4-1-Enable-the-device"><a href="#4-1-Enable-the-device" class="headerlink" title="4.1 Enable the device"></a>4.1 Enable the device</h4><p>在access任何设备寄存器之前，驱动程序需要通过调用pci_enable_device()来启用 PCI 设备。</p>
+<p>This will:</p>
+<ul>
+<li>wake up the device if it was in suspended state,</li>
+<li>allocate I/O and memory regions of the device (if BIOS did not),</li>
+<li>allocate an IRQ (if BIOS did not).</li>
+</ul>
+<h4 id="4-2-Request-MMIO-IOP-resources"><a href="#4-2-Request-MMIO-IOP-resources" class="headerlink" title="4.2 Request MMIO/IOP resources"></a>4.2 Request MMIO/IOP resources</h4><h4 id="4-3-Set-the-DMA-mask-size"><a href="#4-3-Set-the-DMA-mask-size" class="headerlink" title="4.3 Set the DMA mask size"></a>4.3 Set the DMA mask size</h4><h4 id="4-4-Allocate-and-initialize-shared-control-data"><a href="#4-4-Allocate-and-initialize-shared-control-data" class="headerlink" title="4.4 Allocate and initialize shared control data"></a>4.4 Allocate and initialize shared control data</h4><h4 id="4-5-Access-device-configuration-space"><a href="#4-5-Access-device-configuration-space" class="headerlink" title="4.5 Access device configuration space"></a>4.5 Access device configuration space</h4><h4 id="4-6-Register-IRQ-handler"><a href="#4-6-Register-IRQ-handler" class="headerlink" title="4.6 Register IRQ handler"></a>4.6 Register IRQ handler</h4><h4 id="4-7-Initialize-non-PCI"><a href="#4-7-Initialize-non-PCI" class="headerlink" title="4.7 Initialize non-PCI"></a>4.7 Initialize non-PCI</h4>
         </div>
 
         
@@ -271,7 +276,7 @@
         <div class="copyright-info info-item">
             &copy;
             
-              <span>2020</span>
+              <span>2022</span>
               -
             
             2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Angie An</a>
