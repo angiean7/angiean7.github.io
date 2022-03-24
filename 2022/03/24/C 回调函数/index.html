@@ -9,7 +9,7 @@
     
     <title>
         
-            Linux第一个驱动程序hello world编译 |
+            C 回调函数 |
         
         Angie An
     </title>
@@ -131,7 +131,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">Linux第一个驱动程序hello world编译</span>
+            <span class="title-hover-animation">C 回调函数</span>
         </div>
 
         
@@ -148,8 +148,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2022-03-24 11:16:18</span>
-        <span class="mobile">2022-03-24 11:16</span>
+        <span class="pc">2022-03-24 16:48:08</span>
+        <span class="mobile">2022-03-24 16:48</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -157,7 +157,7 @@
             <ul>
                 
                     <li>
-                        <a href="/categories/Linux-drv/">-Linux drv</a>&nbsp;
+                        <a href="/categories/Linux-C/">-Linux C</a>&nbsp;
                     </li>
                 
             </ul>
@@ -177,21 +177,12 @@
         
 
         <div class="article-content markdown-body">
-            <h1 id="Linux第一个驱动程序hello-world编译"><a href="#Linux第一个驱动程序hello-world编译" class="headerlink" title="Linux第一个驱动程序hello world编译"></a>Linux第一个驱动程序hello world编译</h1><ol>
-<li><p>Makefile</p>
-<p>注意点：在vscode里面编辑器会将tab转换为空格，导致编译时报错Makefile:****missing separator. stop， 需要在gedit里面确认格式</p>
-</li>
-</ol>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">KERN_DIR = /lib/modules/`uname -r`/build   </span><br><span class="line"></span><br><span class="line"><span class="section">all:</span></span><br><span class="line">	make -C <span class="variable">$(KERN_DIR)</span> M=<span class="variable">$(PWD)</span> modules</span><br><span class="line"></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">	make -C <span class="variable">$(KERN_DIR)</span> M=<span class="variable">$(PWD)</span> clean</span><br><span class="line"></span><br><span class="line">obj-m += hello_world.o</span><br></pre></td></tr></table></figure>
+            <h1 id="C-callback-function"><a href="#C-callback-function" class="headerlink" title="C callback function"></a>C callback function</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">id1(main program) --- id3(callback func)</span><br><span class="line">id1(main program) --&gt;|calls| id2(Lib Func)</span><br><span class="line">id2(Lib Func) --&gt;|calls| id3(callback func)</span><br></pre></td></tr></table></figure>
 
-<ol start="2">
-<li>hello_world.c</li>
-</ol>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/init.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/module.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">MODULE_LICENSE(<span class="string">&quot;GPL&quot;</span>);<span class="comment">//GPL是开源许可</span></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">hello_init</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    printk(KERN_INFO<span class="string">&quot;Hello World enter\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">void</span> <span class="title function_">hello_exit</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    printk(KERN_INFO<span class="string">&quot;Hello World exit\n &quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module_init(hello_init);</span><br><span class="line">module_exit(hello_exit);</span><br><span class="line"></span><br><span class="line">MODULE_AUTHOR(<span class="string">&quot;hi&quot;</span>);</span><br><span class="line">MODULE_DESCRIPTION(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">MODULE_ALIAS(<span class="string">&quot;world&quot;</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;Lib.h&gt;</span> <span class="comment">// include Library function</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">Callback</span><span class="params">()</span> <span class="comment">// Callback Function</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// TODO</span></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> <span class="comment">// Main program</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// TODO</span></span><br><span class="line">  Library(Callback);</span><br><span class="line">  <span class="comment">// TODO</span></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<ol start="3">
-<li>在同一目录下make后，insmod，rmmod测试</li>
-</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">Callback_1</span><span class="params">(<span class="type">int</span> x)</span> <span class="comment">// Callback Function 1</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Hello, this is Callback_1: x = %d &quot;</span>, x);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">Callback_2</span><span class="params">(<span class="type">int</span> x)</span> <span class="comment">// Callback Function 2</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Hello, this is Callback_2: x = %d &quot;</span>, x);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">Callback_3</span><span class="params">(<span class="type">int</span> x)</span> <span class="comment">// Callback Function 3</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Hello, this is Callback_3: x = %d &quot;</span>, x);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">Handle</span><span class="params">(<span class="type">int</span> y, <span class="type">int</span> (*Callback)(<span class="type">int</span>))</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Entering Handle Function. &quot;</span>);</span><br><span class="line">    Callback(y);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Leaving Handle Function. &quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">2</span>;</span><br><span class="line">    <span class="type">int</span> b = <span class="number">4</span>;</span><br><span class="line">    <span class="type">int</span> c = <span class="number">6</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Entering Main Function. &quot;</span>);</span><br><span class="line">    Handle(a, Callback_1);</span><br><span class="line">    Handle(b, Callback_2);</span><br><span class="line">    Handle(c, Callback_3);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Leaving Main Function. &quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
         </div>
 
@@ -202,29 +193,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2022/03/24/C%20%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">C 回调函数</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2022/03/17/Linux-PCI%20Driver/"
+                           href="/2022/03/24/Linux%201st%20module/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">Linux-PCI Driver</span>
+                                <span class="post-nav-title-item">Linux第一个驱动程序hello world编译</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -332,7 +308,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux%E7%AC%AC%E4%B8%80%E4%B8%AA%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8Fhello-world%E7%BC%96%E8%AF%91"><span class="nav-text">Linux第一个驱动程序hello world编译</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C-callback-function"><span class="nav-text">C callback function</span></a></li></ol>
     </div>
 </div>
         </aside>
