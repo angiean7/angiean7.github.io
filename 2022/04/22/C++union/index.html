@@ -9,7 +9,7 @@
     
     <title>
         
-            Linux使用串口工具minicom |
+            C++ Union structure |
         
         Angie An
     </title>
@@ -131,7 +131,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">Linux使用串口工具minicom</span>
+            <span class="title-hover-animation">C++ Union structure</span>
         </div>
 
         
@@ -148,8 +148,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2022-03-30 13:06:36</span>
-        <span class="mobile">2022-03-30 13:06</span>
+        <span class="pc">2022-04-22 10:53:43</span>
+        <span class="mobile">2022-04-22 10:53</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -177,16 +177,19 @@
         
 
         <div class="article-content markdown-body">
-            <h1 id="Linux使用串口工具"><a href="#Linux使用串口工具" class="headerlink" title="Linux使用串口工具"></a>Linux使用串口工具</h1><p>sudo apt-get install minicom</p>
-<p>安装好之后minicom运行软件</p>
-<p>按下ctrl+a然后再按z打开帮助</p>
-<p>按O进入配置页面</p>
-<p>A serial port setup中设置/dev/ttyS0</p>
-<p>E 115200 8N1</p>
-<p>F No（不设置这个的话输入不了）</p>
-<p>G No</p>
-<p>设置好之后返回，选择Save setup as dfl</p>
-<p>然后重启minicom</p>
+            <h1 id="C-The-union-Data-Structure"><a href="#C-The-union-Data-Structure" class="headerlink" title="C++ The union Data Structure"></a><strong>C++ The union Data Structure</strong></h1><p>A union is like a struct in that it generally has several fields, all of which are public by default. Unlike a struct, however, only one of the fields is used at any given time. </p>
+<p> In other words, it is a structure that allows the same storage space to be used to store values of different data types at different times. </p>
+<p>Unions can be used to conserve memory when a structure is needed in which several pieces of information of different types must be represented but only one will be used at a time, as when the components of a container must contain values of differing data types.</p>
+<p>The usual syntax for a union is illustrated by</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> <span class="title class_">Test</span>&#123;</span><br><span class="line">	<span class="keyword">struct</span>&#123;</span><br><span class="line">		<span class="type">int</span> x;</span><br><span class="line">		<span class="type">int</span> y;</span><br><span class="line">		<span class="type">int</span> z;</span><br><span class="line">	&#125;s;</span><br><span class="line">		<span class="type">int</span> k;</span><br><span class="line">&#125;myUnion;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	myUnion.s.x = <span class="number">4</span>;</span><br><span class="line">	myUnion.s.y = <span class="number">5</span>;</span><br><span class="line">	myUnion.s.z = <span class="number">6</span>;</span><br><span class="line">	myUnion.k = <span class="number">0</span>;</span><br><span class="line">	cout&lt;&lt; myUnion.s.x &lt;&lt;endl;</span><br><span class="line">	cout&lt;&lt; myUnion.s.y &lt;&lt;endl;</span><br><span class="line">	cout&lt;&lt; myUnion.s.z &lt;&lt;endl;</span><br><span class="line">	cout&lt;&lt; myUnion.k &lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>When the above code is executed, the program will output the following result</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+
+<p>对k的赋值因为是union，要共享内存，所以从union的首地址开始放置，首地址开始的位置其实是x的位置，这样原来内存中x的位置就被k所赋的值代替了，就变为0了。</p>
+<p>And this is basically how union works. </p>
 
         </div>
 
@@ -197,29 +200,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2022/04/06/QT%E7%AC%94%E8%AE%B0/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">QT-个人笔记</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2022/03/30/Linux%E8%BF%90%E8%A1%8Capp%E5%B8%A6%E5%8F%82%E6%95%B0%20getopt/"
+                           href="/2022/04/12/WindowsOpenBoard%E6%B5%81%E7%A8%8B/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">Linux运行app带参数 [getopt]</span>
+                                <span class="post-nav-title-item">Windows OpenBoard流程</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -327,7 +315,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux%E4%BD%BF%E7%94%A8%E4%B8%B2%E5%8F%A3%E5%B7%A5%E5%85%B7"><span class="nav-text">Linux使用串口工具</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C-The-union-Data-Structure"><span class="nav-text">C++ The union Data Structure</span></a></li></ol>
     </div>
 </div>
         </aside>
