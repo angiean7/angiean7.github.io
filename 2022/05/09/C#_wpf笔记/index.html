@@ -166,7 +166,12 @@
         
 
         <div class="article-content markdown-body">
-            <h1 id="C-wpf-个人笔记"><a href="#C-wpf-个人笔记" class="headerlink" title="C#      wpf    个人笔记"></a>C#      wpf    个人笔记</h1>
+            <h1 id="C-wpf-个人笔记"><a href="#C-wpf-个人笔记" class="headerlink" title="C#      wpf    个人笔记"></a>C#      wpf    个人笔记</h1><ol>
+<li>如何在TacControl种隐藏标签页</li>
+</ol>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">TabPage tp = tabControl1.TabPages[<span class="number">0</span>];<span class="comment">//在这里先保存，以便以后还要显示</span></span><br><span class="line"></span><br><span class="line">tabControl1.TabPages.Remove(tp);<span class="comment">//隐藏（删除）</span></span><br><span class="line"></span><br><span class="line">tabControl1.TabPages.Insert(<span class="number">0</span>, tp);<span class="comment">//显示（插入）</span></span><br></pre></td></tr></table></figure>
+
+
         </div>
 
         
