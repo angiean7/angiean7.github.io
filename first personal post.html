@@ -30,12 +30,80 @@
 
 
 <body>
-<div class="progress-bar-container">
-    
+.progress-bar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: $z-index-9;
 
-    
-</div>
+  if (hexo-config('pjax.enable') == true) {
 
+    .pjax-progress-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 2px;
+      width: 0;
+      background: var(--pjax-progress-bar-color);
+      visibility: hidden;
+      opacity: 0;
+      z-index: $z-index-8;
+      transition-t("width", "0", "0.1", "linear");
+
+
+      &.show {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
+
+    .pjax-progress-icon {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: $z-index-8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 6px 0 0;
+      visibility: hidden;
+      font-size: 1.1rem;
+      color: var(--default-text-color);
+
+      +keep-tablet() {
+        padding: 6px 5px 0 0;
+        font-size: 1rem;
+      }
+
+      &.show {
+        visibility: visible;
+      }
+    }
+
+  }
+
+  if (hexo-config('style.scroll.progress_bar.enable') == true) {
+
+    .scroll-progress-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: $scroll-progress-bar-height;
+      visibility: hidden;
+      z-index: $z-index-7;
+      background: var(--primary-color);
+      transition-t("width", "0", "0.1", "linear");
+
+      &.hide {
+        display: none !important;
+      }
+    }
+
+  }
+}
 
 <main class="page-container">
 
@@ -44,81 +112,313 @@
     <div class="page-main-content">
 
         <div class="page-main-content-top">
-            <header class="header-wrapper">
+            $logo-title-font-size = 2rem;
+$pc-search-icon-font-size = 1.5rem;
+$menu-bar-line-height = 2.5px;
+$logo-image-box-width = 46px;
 
-    <div class="header-content">
-        <div class="left">
-            
-            <a class="logo-title" href="/">
-                Angie An
-            </a>
-        </div>
+.header-wrapper {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--background-color);
+  padding-top: $scroll-progress-bar-height;
 
-        <div class="right">
-            <div class="pc">
-                <ul class="menu-list">
-                    
-                        <li class="menu-item">
-                            <a class=""
-                               href="/"
-                            >
-                                HOME
-                            </a>
-                        </li>
-                    
-                        <li class="menu-item">
-                            <a class=""
-                               href="/archives"
-                            >
-                                ARCHIVES
-                            </a>
-                        </li>
-                    
-                        <li class="menu-item">
-                            <a class=""
-                               href="/categories"
-                            >
-                                CATEGORIES
-                            </a>
-                        </li>
-                    
-                    
-                </ul>
-            </div>
-            <div class="mobile">
-                
-                <div class="icon-item menu-bar">
-                    <div class="menu-bar-middle"></div>
-                </div>
-            </div>
-        </div>
-    </div>
+  hover-style(false, 0, 0);
 
-    <div class="header-drawer">
-        <ul class="drawer-menu-list">
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/">HOME</a>
-                </li>
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/archives">ARCHIVES</a>
-                </li>
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/categories">CATEGORIES</a>
-                </li>
-            
-        </ul>
-    </div>
+  .header-content {
+    position: relative;
+    height: 100%;
+    width: $main-content-width;
+    max-width: $content-max-width;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    z-index: $z-index-5;
 
-    <div class="window-mask"></div>
 
-</header>
+    &.has-first-screen {
+      max-width: $content-max-width * 1.2;
+    }
 
+    +keep-tablet() {
+      width: $main-content-width-tablet;
+    }
+
+    +keep-mobile() {
+      width: $main-content-width-mobile;
+    }
+
+    .left {
+      display: flex;
+      align-items: center;
+      transition-t("transform", "0", "0.2", "linear");
+
+      .header-shrink & {
+        transform: scale(0.72);
+        transform-origin: left;
+      }
+
+
+      if (hexo-config('base_info.logo_img') && hexo-config('base_info.logo_img') != '') {
+        .logo-image {
+          width: $logo-image-box-width;
+          height: $logo-image-box-width;
+          margin-right: 8px;
+
+
+          +keep-tablet() {
+            width: $logo-image-box-width * 0.9;
+            height: $logo-image-box-width * 0.9;
+          }
+
+          +keep-mobile() {
+            width: $logo-image-box-width * 0.8;
+            height: $logo-image-box-width * 0.8;
+          }
+
+          img {
+            border-radius: 6px;
+            width: 100%;
+          }
+        }
+
+      }
+
+      .logo-title {
+        font-size: $logo-title-font-size;
+        font-weight: bold;
+        letter-spacing: 1px;
+        line-height: 1;
+        color: var(--first-text-color);
+
+        +keep-tablet() {
+          font-size: $logo-title-font-size * 0.9;
+        }
+
+        +keep-mobile() {
+          font-size: $logo-title-font-size * 0.8;
+        }
+      }
+
+    }
+
+
+    .right {
+
+      .pc {
+
+        .menu-list {
+          display: flex;
+          align-items: center;
+
+          +keep-tablet() {
+            display: none;
+          }
+
+
+          .menu-item {
+            float: left;
+            position: relative;
+            margin-left: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            color: var(--default-text-color);
+
+            &:first-child {
+              margin-left: 0;
+            }
+
+
+            a:hover, .active {
+
+              &::after {
+                content: '';
+                position: absolute;
+                bottom: -10px;
+                left: 50%;
+                width: 100%;
+                height: 2px;
+                transform: translateX(-50%);
+                background: var(--primary-color);
+                transition-t("transform, bottom", "0, 0", "0.2, 0.2", "linear, linear");
+
+                .header-shrink & {
+                  bottom: -($header-shrink-height / 2 - 12);
+                }
+              }
+            }
+
+            &.search {
+              font-size: $pc-search-icon-font-size;
+              margin-left: 26px;
+
+              i {
+                color: var(--default-text-color);
+              }
+
+            }
+          }
+
+
+        }
+
+      }
+
+
+      .mobile {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .icon-item {
+          display: none;
+          position: relative;
+          cursor: pointer;
+          font-size: 18px;
+          margin-left: 12px;
+          width: 20px;
+          height: 20px;
+          color: var(--default-text-color);
+
+          i {
+            color: var(--default-text-color);
+          }
+
+          &:first-child {
+            margin-left: 0;
+          }
+
+          +keep-tablet() {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        }
+
+        .menu-bar {
+
+          .menu-bar-middle {
+            width: 18px;
+            height: $menu-bar-line-height;
+            position: relative;
+            background: var(--default-text-color);
+
+            .header-drawer-show & {
+              background: transparent;
+            }
+
+
+            &::before, &::after {
+              content: '';
+              position: absolute;
+              left: 0;
+              width: 100%;
+              height: $menu-bar-line-height;
+              background: var(--default-text-color);
+              transition-t("transform", "0", "0.38", "ease");
+            }
+
+
+            &::before {
+              top: -6px;
+
+              .header-drawer-show & {
+                transform: translateY(6px) rotate(45deg);
+              }
+            }
+
+
+            &::after {
+              bottom: -6px;
+
+              .header-drawer-show & {
+                transform: translateY(-6px) rotate(-45deg);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+  .header-drawer {
+    width: 100%;
+    padding: $header-height 0 20px 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: scaleY(0);
+    transform-origin: top;
+    z-index: $z-index-2;
+    background: var(--background-color);
+    transition-t("transform", "0", "0.38", "ease");
+
+    .header-drawer-show & {
+      transform: scaleY(1);
+    }
+
+    .drawer-menu-list {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+
+      .drawer-menu-item {
+        font-size: 1rem;
+        margin: 6px 0;
+        height: 38px;
+
+        a {
+          padding: 6px 20px;
+          border-radius: 20px;
+          color: var(--default-text-color);
+
+          &:hover {
+            color: var(--second-text-color);
+            border: 1px solid var(--default-text-color);
+          }
+
+
+          &.active {
+            border: 1px solid var(--default-text-color);
+            color: var(--second-text-color);
+          }
+        }
+
+
+      }
+    }
+  }
+
+
+  .window-mask {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: $z-index-1;
+    visibility: hidden;
+    opacity: 0;
+    transition-t("transform, opacity", "0, 0", "0.38, 0.38", "ease, ease");
+
+    .header-drawer-show & {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+}
+
+.header-drawer-show {
+  overflow: hidden;
+}
 
         </div>
 
@@ -127,99 +427,165 @@
             <div class="main-content">
 
                 
-                    <div class="fade-in-down-animation">
-    <div class="page-template-container">
-        
-        
-        <div class="page-template-content markdown-body">
-            
-                <p>今天稍微整理了一下和不動産屋のやり取り</p>
-<p><strong>お世話になっております。</strong></p>
-<p>学生名義ですがお家賃をお支払いにつきましてご心配には及びません。私自身は300万円以上の貯蓄があり、親からの仕送りもあります。その他、私のパートナーが7月に来日し、IT企業で働くことになり、私と共に家賃を支払いすることもできます。</p>
-<p>内見につきましては、ご確認頂きありがとうございました。お忙しいかと思いますが、下記の中で予約可能な日時はありますでしょうか？<br>·5月6日 12時前</p>
-<p>どうぞよろしくお願いいたします。</p>
-<p><strong>お世話になっております。</strong><br>ご連絡ありがとうございました。</p>
-<p>また、詳細につきましてもご教授いただき誠にありがとうございます。<br>ご契約時には、住民票が必要になるケースが多いのですが住民票はございますでしょうか。</p>
-<p>内見につきましては、管理会社が恐らく本日までのお休みかと思うのですが電話したところ確認が取れませんでしたので、明日のご案内が可能か午前中に確認しましてご連絡を差し上げても宜しいでしょうか。</p>
-<p>可能であれば、11時60分ごろにリモートでさせていただけますと幸いでございます。<br>また、リモートでのご案内の際にはGoogle meetで宜しいでしょうか。</p>
-<p>ご連絡心よりお待ちしております。<br>引き続き、よろしくお願い申し上げます。</p>
-<p><strong>お世話になっております。</strong><br>ご返信ありがとうございました。</p>
-<p>ご契約時には、住民票が必要になるケースが多いのですが住民票はございますでしょうか。<br>-&gt;住民票を取得するためには日本に入国してから区役所で住民登録をする必要がありますので、私は今海外在住で住民登録ができません。色々調べましたが、海外在住で日本に住民票が無い場合は、契約時に住民票の代わりとして在留証明書を提出しても良いらしいです。お手数をおかけしますが、この件につきましてご調査いただければ幸いです。</p>
-<p>内見につきましては、管理会社が恐らく本日までのお休みかと思うのですが電話したところ確認が取れませんでしたので、明日のご案内が可能か午前中に確認しましてご連絡を差し上げても宜しいでしょうか。<br>-&gt;はい、お願い致します。お手間をかけていただきありがとうございます。</p>
-<p>可能であれば、11時60分ごろにリモートでさせていただけますと幸いでございます。<br>また、リモートでのご案内の際にはGoogle meetで宜しいでしょうか。<br>-&gt;はい、大丈夫です。ちなみに、私はあまり日本語が話せないので中国語/英語でご対応いただけますと幸いです。或は前に言及した私のパートナーも参加させて頂けますでしょうか。</p>
-<p>ご連絡心よりお待ちしております。<br>どうぞよろしくお願いいたします。</p>
-<p><strong>お世話になっております。</strong><br>ご連絡ありがとうございました。</p>
-<p>管理会社の物件担当に確認したところ、こちらの物件の管理会社ですが外国人留学生様の契約の際の規定としまして賃料＋共益費又は管理費が10万円以内の物件というのが必須条件との事でした。</p>
-<p>その為、その賃料以内の物件をご検討くださいとの事でして、預貯金などもあるとご相談させていただいたのですが学生様の規定が決まっている為ご相談は難しいとの事でした。</p>
-<p>もちろん全ての物件管理会社がそうという訳ではなく、こちらの管理会社は一般的に審査が厳しいラインの管理会社である事をご理解下さいませ。</p>
-<p>また、住民票の代わりに留学ビザや在留認定証明書での代用は可能との事でしたので必要な際にはご用意いただけますと幸いでございます。</p>
-<p>誠に恐縮ですが、他物件をご検討いただく事は可能でしょうか。<br>私の方で物件のご紹介をさせていただく事も可能ですので、ご連絡心よりお待ちしております。</p>
-<p><strong>お世話になっております。</strong><br>ご確認頂きありがとうございました。</p>
-<p>管理会社の規定につきましては承知致しました。残念ですが他の物件を探すしかないですね。もし、問い合わせた物件と似た部屋があるようなら、他の物件も観てみたいです。</p>
-<p>・上野駅から徒歩10分以内<br>・家賃+管理費13万円以内<br>・専有面積30㎡以上<br>・1DK以上<br>・採光が良い<br>・角部屋希望<br>・礼金なし<br>・(留学生)家賃10万円以上可</p>
-<p>希望条件を優先したい順に並べて書いてみました。<br>この条件に近い物件をご紹介いただければ幸いです。</p>
-<p>また、留学ビザや在留認定証明書は既に用意していますのでご心配には及びません。ご確認頂きありがとうございました。</p>
-<p>ご連絡心よりお待ちしております。<br>どうぞよろしくお願いいたします。</p>
-<p><strong>おはようございます。ご返信ありがとうございました。</strong></p>
-<p>・お申込み希望であればデータにて申込書類を送らせて頂きますので印刷してご記入頂く事は可能でしょうか？<br>-&gt;はい、よろしくお願いします。伺いたいのですが、留学生の場合は住民票の代わりに留学ビザや在留認定証明書での代用は可能でしょうか？審査通過の為、留学生として他に準備すべき書類などの詳細につきましてご教授いただけたら幸いです。</p>
-<p>ご連絡心よりお待ちしております。<br>引き続き、よろしくお願い申し上げます。</p>
-<p><strong>ご連絡誠にありがとうございます。</strong></p>
-<p>入居申込書につきまして承知いたしました。</p>
-<p>確認したいのですが、「保証会社利用必 初回保証料：賃料等の35％　　月額保証料：賃料等の1.65％」という情報がSUUMOとHome’sのページに載っていらっしゃいましたので、ご相談させていただければと存じます。</p>
-<p>また、私の場合は11日に入国し、入国当日のみ在留カードを入手することができます。現在ではパスポート・在留証明書・学生証という形で提出しても宜しいでしょうか。</p>
-<p>ご連絡心よりお待ちしております。</p>
-<p><strong>お世話になります。</strong><br>保証会社につきましては外国籍の学生様だと初回保証料100％ ￥1,000/月となります。。<br>何卒ご理解の程、よろしくお願い致します。</p>
-<p>提出物は提出できるものから随時の提出でも問題ございません。<br>ご検討の程、よろしくお願い致します。</p>
-<p><strong>お世話になっております。</strong></p>
-<p>保証会社につきまして承知しました。今のところ当物件が第一希望の物件なのですが、お安くしていただけることは可能でしょうか？<br>もし可能でしたら当物件で即決したいと考えております。</p>
-<p>こちらの都合で申し訳ありませんが、差し支えなければその点についてご検討をお願いします。<br>ご返信お待ちしております。</p>
-<p><strong>お世話になっております。</strong><br>ご連絡が誠に遅くなりまして誠に申し訳ございませんでした。</p>
-<p>ご希望条件につきましても、ご教授いただき誠にありがとうございました。</p>
-<p>本日は終日ご案内の為、出来るだけお早めにお送りさせていただきますので引き続き、何卒宜しくお願い致します。</p>
-<p>恐れ入りますが、今しばらくお待ちください。</p>
-<p><strong>いつもお世話になっております。</strong></p>
-<p>物件探しの件につきまして誠にありがとうございます。</p>
-<p>下記物件は、現在空室でしょうか？</p>
-<p>·グローベルザ・スイート上野 803</p>
-<p>空室だった場合、前と同じ状況で入居申込+審査や賃貸契約を行うことが可能でしょうか。</p>
-<p>どうぞよろしくお願いいたします。</p>
-<p>ご連絡心よりお待ちしております。</p>
-<p><strong>お世話になっております。</strong><br>ご連絡ありがとうございました。</p>
-<p>グローベルザ・スイート上野803 号室ですが、募集中ではございましたがこちら7/24退去予定となっておりましたので、入居出来るのが8月過ぎにはなってしまうかと存じます。</p>
-<p>宜しければ図面を添付致しますのでご覧下さいませ。</p>
-<p>お忙しいところ恐縮ですが、引き続き、宜しくお願い致します。</p>
-<p><strong>いつもお世話になっております。</strong></p>
-<p>早速のご連絡を誠にありがとうございます。残念ですが、早めに入居したいと思いますので、他物件を探します。</p>
-<p>また、上野駅、日暮里駅、神田駅、秋葉原駅から徒歩10分以内にある希望条件に近い物件をご紹介いただければ幸いです。</p>
-<p>何卒宜しくお願い致します。</p>
-<p><strong>ご連絡が誠に遅くなりまして誠に申し訳ございませんでした。</strong></p>
-<p>ご物件につきまして、ご教授いただき誠にありがとうございました。</p>
-<p>もし、問い合わせた物件と似た部屋があるようなら、他の物件を観てみたいです。</p>
-<p>・留学生賃貸可</p>
-<p>・日暮里駅から徒歩10分以内 </p>
-<p>・家賃+管理費13万円以内 </p>
-<p>・専有面積30㎡以上 </p>
-<p>・1DK以上 </p>
-<p>・採光が良い </p>
-<p>・礼金なし希望</p>
-<p>希望条件を優先したい順に並べて書いてみました。 この条件に近い物件をご紹介いただければ幸いです。</p>
-<p>ご連絡心よりお待ちしております。</p>
-<p> どうぞよろしくお願いいたします。</p>
-<p>〇〇不動産屋　ご担当者様</p>
-<p>この度、以下の物件の空き室状況について連絡させていただきました、安琪と申します。</p>
-<p>· 第２池田ビル(４階)</p>
-<p>今のところ当物件が第一希望の物件なのですが、外国人の入居につきましてご相談していただけることは可能でしょうか？私は残高証明書と連帯保証人が有り、外国人専用の賃貸住宅保証会社（GTN）などを利用し、より信頼度が高くなると思います。もし可能でしたら当物件に決めたいと考えております。</p>
-<p>こちらの都合で申し訳ございませんが、ご相談いただけますと幸いです。</p>
-<p>心よりご返信お待ちしております。</p>
-<p>こちらの都合で申し訳ありませんが、差し支えなければその点についてご検討をお願いします。<br>ご返信お待ちしております。</p>
+                    $friend-link-item-height = 82px;
+$friend-link-item-height-tablet = 68px;
+$friend-link-item-interval = 16px;
+$friend-link-item-border-radius = 6px;
 
-            
-        </div>
-        <div class="page-template-comments">
-            
-        </div>
-    </div>
-</div>
+.page-template-container {
+
+  keep-container(false, 0, 0, 30px, 30px);
+
+  .page-template-content {
+    color: var(--default-text-color);
+
+    h1, h2, h3, h4, h5, h6 {
+
+      &:first-child {
+        margin-top: 0;
+      }
+
+    }
+  }
+
+
+  if (hexo-config('menu.Links')) {
+    .friends-link-container {
+
+      .friends-link-list {
+        position: relative;
+
+        .friends-link-item {
+          box-sizing: border-box;
+          position: relative;
+          float: left;
+          width: 50%;
+          cursor: pointer;
+          height: $friend-link-item-height;
+          padding-bottom: $friend-link-item-interval;
+
+          +keep-tablet() {
+            height: $friend-link-item-height-tablet;
+          }
+
+          &:nth-child(odd) {
+            padding-right: $friend-link-item-interval * 0.5;
+          }
+
+          &:nth-child(even) {
+            padding-left: $friend-link-item-interval * 0.5;
+          }
+
+          .content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            box-shadow: 1px 1px 2px var(--shadow-color);
+            border-radius: $friend-link-item-border-radius;
+            padding-left: $friend-link-item-height - $friend-link-item-interval;
+            box-sizing: border-box;
+
+
+            +keep-tablet() {
+              padding-left: $friend-link-item-height-tablet - $friend-link-item-interval;
+            }
+
+            &:hover {
+              box-shadow: 1px 1px 6px var(--shadow-color);
+
+              .info .name {
+                color: var(--primary-color);
+              }
+            }
+
+            .radius {
+              border-top-left-radius: $friend-link-item-border-radius;
+              border-bottom-left-radius: $friend-link-item-border-radius;
+            }
+
+            .avatar {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: $friend-link-item-height  - $friend-link-item-interval;
+              height: 100%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              font-size: 2rem;
+              background: var(--second-background-color);
+              color: var(--second-text-color);
+
+
+              +keep-tablet() {
+                width: $friend-link-item-height-tablet  - $friend-link-item-interval;
+              }
+
+              img {
+                box-sizing: border-box;
+                position: relative;
+                width: 100%;
+                height: 100%;
+              }
+            }
+
+
+            .info {
+              position: relative;
+              width: 100%;
+              height: 100%;
+              box-sizing: border-box;
+              padding: 10px;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-items: flex-start;
+
+              +keep-tablet() {
+                padding: 6px;
+              }
+
+              .name {
+                width: 100%;
+                height: 60%;
+                font-size: 1.28rem;
+                color: var(--second-text-color);
+
+                +keep-tablet() {
+                  font-size: 1.08rem;
+                }
+              }
+
+              .description {
+                width: 100%;
+                height: 40%;
+                font-size: 1rem;
+                color: var(--third-text-color);
+
+
+                +keep-tablet() {
+                  font-size: 0.98rem;
+                }
+              }
+
+              .ellipsis {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+              }
+
+            }
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+}
 
 
                 
@@ -228,21 +594,35 @@
         </div>
 
         <div class="page-main-content-bottom">
-            <footer class="footer">
-    <div class="info-container">
-        <div class="copyright-info info-item">
-            &copy;
-            
-              <span>2022</span>
-              -
-            
-            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Angie An</a>
-        </div>
-        
-        
-        
-    </div>
-</footer>
+            .footer {
+  font-size: 1rem;
+  color: var(--third-text-color);
+
+
+  a {
+    color: var(--third-text-color);
+
+
+    &:hover {
+      color: var(--primary-color);
+
+    }
+  }
+
+  .info-container {
+    padding-bottom: 10px;
+    text-align: center;
+  }
+
+  .info-item {
+    margin: 5px 0;
+  }
+
+  .icon-animate {
+    animation: icon-animate 1.2s ease-in-out infinite;
+  }
+
+}
 
         </div>
     </div>
@@ -250,53 +630,161 @@
     
 
     <div class="right-bottom-side-tools">
-        <div class="side-tools-container">
-    <ul class="side-tools-list">
-        <li class="tools-item tool-font-adjust-plus flex-center">
-            <i class="fas fa-search-plus"></i>
-        </li>
+        $tools-item-width = 32px;
+$tools-item-font-size = 1.1rem;
+$tools-item-border-radius = 1px;
 
-        <li class="tools-item tool-font-adjust-minus flex-center">
-            <i class="fas fa-search-minus"></i>
-        </li>
 
-        <li class="tools-item tool-expand-width flex-center">
-            <i class="fas fa-arrows-alt-h"></i>
-        </li>
+.side-tools-container {
+  position: relative;
 
-        <li class="tools-item tool-dark-light-toggle flex-center">
-            <i class="fas fa-moon"></i>
-        </li>
+  .tools-item {
+    width: $tools-item-width;
+    height: $tools-item-width;
+    font-size: $tools-item-font-size;
+    margin-bottom: 3px;
+    cursor: pointer;
+    border-right: none;
+    border-radius: $tools-item-border-radius;
+    box-shadow: 1px 1px 3px var(--shadow-color);
+    color: var(--default-text-color);
+    background: var(--background-color);
 
-        <!-- rss -->
-        
+    i {
+      color: var(--default-text-color);
+    }
 
-        
-            <li class="tools-item tool-scroll-to-top flex-center">
-                <i class="fas fa-arrow-up"></i>
-            </li>
-        
+    &:hover {
+      color: var(--background-color);
+      background: var(--primary-color);
+      box-shadow: 2px 2px 6px var(--shadow-color);
 
-        <li class="tools-item tool-scroll-to-bottom flex-center">
-            <i class="fas fa-arrow-down"></i>
-        </li>
-    </ul>
+      i {
+        color: var(--background-color);
+      }
+    }
 
-    <ul class="exposed-tools-list">
-        <li class="tools-item tool-toggle-show flex-center">
-            <i class="fas fa-cog fa-spin"></i>
-        </li>
-        
-    </ul>
-</div>
+    +keep-tablet() {
+      width: $tools-item-width * 0.9;
+      height: $tools-item-width * 0.9;
+      font-size: $tools-item-font-size * 0.9;
+      margin-bottom: 2px;
+    }
+
+    &.rss {
+
+      a {
+        border-radius: $tools-item-border-radius;
+        width: 100%;
+        height: 100%;
+
+        &:hover {
+          color: var(--background-color);
+          background: var(--primary-color);
+          box-shadow: 2px 2px 6px var(--shadow-color);
+        }
+      }
+    }
+  }
+
+
+  .side-tools-list {
+    opacity: 0;
+    transform: translateX(100%);
+    transition-t("transform, opacity", "0, 0", "0.2, 0.2", "linear, linear");
+
+    .tool-expand-width {
+      +keep-tablet() {
+        display: none;
+      }
+    }
+
+
+    &.show {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+
+  .exposed-tools-list {
+
+    if (hexo-config('style.scroll.percent.enable') == true) {
+      .tool-scroll-to-top {
+        display: none;
+
+        &.show {
+          display: flex;
+        }
+
+        &:hover {
+
+          .percent {
+            display: none;
+          }
+
+          .arrow-up {
+            display: flex;
+          }
+
+        }
+
+        .arrow-up {
+          display: none;
+        }
+
+        .percent {
+          display: flex;
+          font-size: 1rem;
+        }
+
+      }
+
+    }
+  }
+}
 
     </div>
 
     
 
-    <div class="image-viewer-container">
-    <img src="">
-</div>
+    .image-viewer-container {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0);
+  visibility: hidden;
+  z-index: $z-index-8;
+  padding: 6%;
+  box-sizing: border-box;
+  transition-t("visibility, background", "0, 0", "0.3, 0.3", "ease, ease");
+
+  &.active {
+    background: rgba(0, 0, 0, 0.5);
+    visibility: visible;
+
+    img {
+      cursor: zoom-out;
+      transform: scale(1);
+      padding: 2px;
+      background: var(--background-color);
+    }
+  }
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    transform: scale(0);
+    transition-t("transform", "0", "0.3", "ease");
+  }
+}
+
+
 
 
     

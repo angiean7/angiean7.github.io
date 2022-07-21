@@ -9,6 +9,8 @@
 
     <title>
         
+            日语笔记 |
+        
         Angie An
     </title>
     
@@ -429,7 +431,7 @@ $logo-image-box-width = 46px;
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation"></span>
+            <span class="title-hover-animation">日语笔记</span>
         </div>
 
         
@@ -509,202 +511,15 @@ $logo-image-box-width = 46px;
         
 
         <div class="article-content markdown-body">
-            <h2 id="Packed-YUV-Formats"><a href="#Packed-YUV-Formats" class="headerlink" title="Packed YUV Formats"></a>Packed YUV Formats</h2><table>
-<thead>
-<tr>
-<th><strong>Label</strong></th>
-<th><strong>FOURCC in Hex</strong></th>
-<th><strong>Bits per pixel</strong></th>
-<th><strong>Description</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><a class="link"   target="_blank" rel="noopener" href="https://fourcc.org/pixel-format/yuv-ayuv/" >AYUV<i class="fas fa-external-link-alt"></i></a></td>
-<td>0x56555941</td>
-<td>32</td>
-<td>Combined YUV and alpha</td>
-</tr>
-<tr>
-<td><a class="link"   target="_blank" rel="noopener" href="https://fourcc.org/pixel-format/yuv-cljr/" >CLJR<i class="fas fa-external-link-alt"></i></a></td>
-<td>0x524A4C43</td>
-<td>8</td>
-<td>Cirrus Logic format with 4 pixels packed into a u_int32. A form of YUV 4:1:1 wiht less than 8 bits per Y, U and V sample.</td>
-</tr>
-<tr>
-<td><a class="link"   target="_blank" rel="noopener" href="https://fourcc.org/pixel-format/yuv-cyuv/" >CYUV<i class="fas fa-external-link-alt"></i></a></td>
-<td>0x76757963</td>
-<td>16</td>
-<td>Essentially a copy of UYVY except that the sense of the height is reversed - the image is upside down with respect to the UYVY version.</td>
-</tr>
-<tr>
-<td><a class="link"   target="_blank" rel="noopener" href="https://fourcc.org/pixel-format/yuv-y800/" >GREY (Y800)<i class="fas fa-external-link-alt"></i></a></td>
-<td>0x59455247</td>
-<td>8</td>
-<td>Apparently a duplicate of Y800 (and also, presumably, “Y8 “)</td>
-</tr>
-<tr>
-<td><a class="link"   target="_blank" rel="noopener" href="https://fourcc.org/pixel-format/yuv-uyvy/" >HDYC (UYVY)<i class="fas fa-external-link-alt"></i></a></td>
-<td>0x43594448</td>
-<td>16</td>
-<td>YUV 4:2:2 (Y sample at every pixel, U and V sampled at every second pixel horizontally on each line). A macropixel contains 2 pixels in 1 u_int32. This is a suplicate of UYVY except that the color components use the BT709 color space (as used in HD video).</td>
-</tr>
-<tr>
-<td>IRAW</td>
-<td>0x57615349</td>
-<td>?</td>
-<td>Intel uncompressed YUV. I have no information on this format - can you help?</td>
-</tr>
-<tr>
-<td><a class="link"   target="_blank" rel="noopener" href="https://fourcc.org/pixel-format/yuv-uyvy/" >IUYV (UYVY)<i class="fas fa-external-link-alt"></i></a></td>
-<td>0x56595549</td>
-<td>16</td>
-<td>Interlaced version of UYVY (line order 0, 2, 4,….,1, 3, 5….) registered by Silviu Brinzei of LEAD Technologies.</td>
-</tr>
-<tr>
-<td><a class="link"   target="_blank" rel="noopener" href="https://fourcc.org/pixel-format/yuv-iy41/" >IY41<i class="fas fa-external-link-alt"></i></a></td>
-<td>0x31555949</td>
-<td>12</td>
-<td>Interlaced version of Y41P (line order 0, 2, 4,….,1, 3, 5….) registered by Silviu Brinzei of LEAD Technologies.</td>
-</tr>
-<tr>
-<td><a class="link"   target="_blank" rel="noopener" href="https://fourcc.org/pixel-format/yuv-iyu1/" >IYU1<i class="fas fa-external-link-alt"></i></a></td>
-<td>0x31555949</td>
-<td>12</td>
-<td>12 bit format used in mode 2 of the IEEE 1394 Digital Camera 1.04 spec. This is equivalent to Y411</td>
-</tr>
-<tr>
-<td><a class="link"   target="_blank" rel="noopener" href="https://fourcc.org/pixel-format/yuv-iyu2/" >IYU2<i class="fas fa-external-link-alt"></i></a></td>
-<td>0x32555949</td>
-<td>24</td>
-<td>24 bit format used in mode 0 of the IEEE 1394 Digital Camera 1.04 spec</td>
-</tr>
-<tr>
-<td><a class="link"   target="_blank" rel="noopener" href="https://fourcc.org/pixel-format/yuv-uyvy/" >UYNV (UYVY)<i class="fas fa-external-link-alt"></i></a></td>
-<td>0x564E5955</td>
-<td>16</td>
-<td>A direct copy of UYVY registered by NVidia to work around problems in some old codecs which did not like hardware which offered more than 2 UYVY surfaces.</td>
-</tr>
-<tr>
-<td>UYVP</td>
-<td>0x50565955</td>
-<td>24?</td>
-<td>YCbCr 4:2:2 extended precision 10-bits per component in U0Y0V0Y1 order. Registered by Rich Ehlers of Evans &amp; Sutherland.</td>
-</tr>
-<tr>
-<td><a class="link"   target="_blank" rel="noopener" href="https://fourcc.org/pixel-format/yuv-uyvy/" >UYVY<i class="fas fa-external-link-alt"></i></a></td>
-<td>0x59565955</td>
-<td>16</td>
-<td>YUV 4:2:2 (Y sample at every pixel, U and V sampled at every second pixel horizontally on each line). A macropixel contains 2 pixels in 1 u_int32.</td>
-</tr>
-<tr>
-<td><a class="link"   target="_blank" rel="noopener" href="https://fourcc.org/pixel-format/yuv-v210/" >V210<i class="fas fa-external-link-alt"></i></a></td>
-<td>0x30313256</td>
-<td>32</td>
-<td>10-bit 4:2:2 YCrCb equivalent to the Quicktime format of the same name.</td>
-</tr>
-<tr>
-<td>V422</td>
-<td>0x32323456</td>
-<td>16</td>
-<td>I am told that this is an upside down version of UYVY.</td>
-</tr>
-<tr>
-<td>V655</td>
-<td>0x35353656</td>
-<td>16?</td>
-<td>16 bit YUV 4:2:2 format registered by Vitec Multimedia. I have no information on the component ordering or packing.</td>
-</tr>
-<tr>
-<td>VYUY</td>
-<td>0x59555956</td>
-<td>?</td>
-<td>ATI Packed YUV Data (format unknown)</td>
-</tr>
-<tr>
-<td><a class="link"   target="_blank" rel="noopener" href="https://fourcc.org/pixel-format/yuv-y16/" >Y16<i class="fas fa-external-link-alt"></i></a></td>
-<td>0x20363159</td>
-<td>16</td>
-<td>16-bit uncompressed greyscale image.</td>
-</tr>
-<tr>
-<td><a class="link"   target="_blank" rel="noopener" href="https://fourcc.org/pixel-format/yuv-y211/" >Y211<i class="fas fa-external-link-alt"></i></a></td>
-<td>0x31313259</td>
-<td>8</td>
-<td>Packed YUV format with Y sampled at every second pixel across each line and U and V sampled at every fourth pixel.</td>
-</tr>
-<tr>
-<td><a class="link"   target="_blank" rel="noopener" href="https://fourcc.org/pixel-format/yuv-y411/" >Y411<i class="fas fa-external-link-alt"></i></a></td>
-<td>0x31313459</td>
-<td>12</td>
-<td>YUV 4:1:1 with a packed, 6 byte/4 pixel macroblock structure.</td>
-</tr>
-<tr>
-<td><a class="link"   target="_blank" rel="noopener" href="https://fourcc.org/pixel-format/yuv-y41p/" >Y41P<i class="fas fa-external-link-alt"></i></a></td>
-<td>0x50313459</td>
-<td>12</td>
-<td>YUV 4:1:1 (Y sample at every pixel, U and V sampled at every fourth pixel horizontally on each line). A macropixel contains 8 pixels in 3 u_int32s.</td>
-</tr>
-<tr>
-<td><a class="link"   target="_blank" rel="noopener" href="https://fourcc.org/pixel-format/yuv-y41t/" >Y41T<i class="fas fa-external-link-alt"></i></a></td>
-<td>0x54313459</td>
-<td>12</td>
-<td>Format as for Y41P but the lsb of each Y component is used to signal pixel transparency .</td>
-</tr>
-<tr>
-<td><a class="link"   target="_blank" rel="noopener" href="https://fourcc.org/pixel-format/yuv-uyvy/" >Y422 (UYVY)<i class="fas fa-external-link-alt"></i></a></td>
-<td>0x32323459</td>
-<td>16</td>
-<td>Direct copy of UYVY as used by ADS Technologies Pyro WebCam firewire camera.</td>
-</tr>
-<tr>
-<td><a class="link"   target="_blank" rel="noopener" href="https://fourcc.org/pixel-format/yuv-y42t/" >Y42T<i class="fas fa-external-link-alt"></i></a></td>
-<td>0x54323459</td>
-<td>16</td>
-<td>Format as for UYVY but the lsb of each Y component is used to signal pixel transparency .</td>
-</tr>
-<tr>
-<td><a class="link"   target="_blank" rel="noopener" href="https://fourcc.org/pixel-format/yuv-y800/" >Y8 (Y800)<i class="fas fa-external-link-alt"></i></a></td>
-<td>0x20203859</td>
-<td>8</td>
-<td>Duplicate of Y800 as far as I can see.</td>
-</tr>
-<tr>
-<td><a class="link"   target="_blank" rel="noopener" href="https://fourcc.org/pixel-format/yuv-y800/" >Y800<i class="fas fa-external-link-alt"></i></a></td>
-<td>0x30303859</td>
-<td>8</td>
-<td>Simple, single Y plane for monochrome images.</td>
-</tr>
-<tr>
-<td><a class="link"   target="_blank" rel="noopener" href="https://fourcc.org/pixel-format/yuv-yuy2/" >YUNV (YUY2)<i class="fas fa-external-link-alt"></i></a></td>
-<td>0x564E5559</td>
-<td>16</td>
-<td>A direct copy of YUY2 registered by NVidia to work around problems in some old codecs which did not like hardware which offered more than 2 YUY2 surfaces.</td>
-</tr>
-<tr>
-<td><a class="link"   target="_blank" rel="noopener" href="https://fourcc.org/pixel-format/yuv-yuvp/" >YUVP<i class="fas fa-external-link-alt"></i></a></td>
-<td>0x50565559</td>
-<td>24?</td>
-<td>YCbCr 4:2:2 extended precision 10-bits per component in Y0U0Y1V0 order. Registered by Rich Ehlers of Evans &amp; Sutherland.</td>
-</tr>
-<tr>
-<td><a class="link"   target="_blank" rel="noopener" href="https://fourcc.org/pixel-format/yuv-yuy2/" >YUY2<i class="fas fa-external-link-alt"></i></a></td>
-<td>0x32595559</td>
-<td>16</td>
-<td>YUV 4:2:2 as for UYVY but with different component ordering within the u_int32 macropixel.</td>
-</tr>
-<tr>
-<td><a class="link"   target="_blank" rel="noopener" href="https://fourcc.org/pixel-format/yuv-yuy2/" >YUYV (YUY2)<i class="fas fa-external-link-alt"></i></a></td>
-<td>0x56595559</td>
-<td>16</td>
-<td>Duplicate of YUY2</td>
-</tr>
-<tr>
-<td><a class="link"   target="_blank" rel="noopener" href="https://fourcc.org/pixel-format/yuv-yvyu/" >YVYU<i class="fas fa-external-link-alt"></i></a></td>
-<td>0x55595659</td>
-<td>16</td>
-<td>YUV 4:2:2 as for UYVY but with different component ordering within the u_int32 macropixel.</td>
-</tr>
-</tbody></table>
+            <h3 id="20220721"><a href="#20220721" class="headerlink" title="20220721"></a>20220721</h3><p>頑な(かたくな)：自分の意見や考え、主張に固執し、変えようとしないさま。</p>
+<p>表沙汰(おもてざた)：内密にしたいことが世間に知れ渡ること。</p>
+<p>やむを得ず：どうしようもなく、仕方なく</p>
+<p>腰を引ける：自信がなかったり恐れたりして、積極的に振る舞うことができない。</p>
+<p>腰を据えて：落ち着いて、じっくり構えてことに当たることを意味する表現。 </p>
+<p>据える：場所を設けて、その場所から動かないように物を置く。</p>
+<p>構えて：まちがいなく。 本当に。 必ず。</p>
+<p>当たる：物事や人が直面、接触する。</p>
+<p>相応しい：似つかわしい。ある事物が別の事物と雰囲気などの点で合っているさま。 </p>
 
         </div>
 
@@ -715,29 +530,14 @@ $logo-image-box-width = 46px;
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2022/07/21/%E6%97%A5%E8%AF%AD%E7%AC%94%E8%AE%B0/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">日语笔记</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2022/05/09/C#_wpf%E7%AC%94%E8%AE%B0/"
+                           href="/2022/05/11/Packed%20YUV%20Formats/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">C#-wpf笔记</span>
+                                <span class="post-nav-title-item"></span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
