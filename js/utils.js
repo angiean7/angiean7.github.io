@@ -75,7 +75,7 @@ KEEP.initUtils = () => {
 
     // toggle show tools list
     toggleShowToolsList() {
-      document.querySelector('.tool-toggle-show').addEventListener('click', () => {
+      document.querySelector('.tool-toggle-show').addListener('click', () => {
         document.querySelector('.side-tools-list').classList.toggle('show');
       });
     },
