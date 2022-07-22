@@ -186,7 +186,30 @@
 <p>2、machine driver对应的中断处理handler中会根据硬件的信息获取HW interrupt ID，并且通过irq domain模块翻译成IRQ number</p>
 <p>3、调用该IRQ number对应的high level irq event handler，在这个high level的handler中，会通过和interupt controller交互，进行中断处理的flow control（处理中断的嵌套、抢占等），当然最终会遍历该中断描述符的IRQ action list，调用外设的specific handler来处理该中断</p>
 <p>4、具体CPU architecture相关的模块会进行现场恢复。</p>
-<h2 id="驱动申请中断API"><a href="#驱动申请中断API" class="headerlink" title="驱动申请中断API"></a>驱动申请中断API</h2><p>参考： <a class="link"   target="_blank" rel="noopener" href="http://www.wowotech.net/irq_subsystem/request_threaded_irq.html" >http://www.wowotech.net/irq_subsystem/request_threaded_irq.html<i class="fas fa-external-link-alt"></i></a></p>
+<h2 id="驱动申请中断API"><a href="#驱动申请中断API" class="headerlink" title="驱动申请中断API"></a>驱动申请中断API</h2><h4 id="非抢占式linux内核的实时性"><a href="#非抢占式linux内核的实时性" class="headerlink" title="非抢占式linux内核的实时性"></a>非抢占式linux内核的实时性</h4><p><img src="http://www.wowotech.net/content/uploadfile/201409/89cc8133ade45f46ce400d3d2d74ce6f20140922103326.gif" alt="sxw"></p>
+<ul>
+<li><p>高优先级任务（橘色block）由于要等待外部事件（例如网络数据）而进入睡眠，调度器调度了某个低优先级的任务（紫色block）执行。</p>
+</li>
+<li><p>该低优先级任务欢畅的执行，直到触发了一次系统调用（例如通过read()文件接口读取磁盘上的文件等）而进入了内核态，从user space切换到了kernel space。</p>
+</li>
+<li><p>T0时刻，高优先级任务等待的那个中断事件发生了。</p>
+</li>
+<li><p>中断虽然发生了，但软件不一定立刻响应，可能由于在内核态执行的某些操作（在临界区内）不希望被外部事件打断而主动关闭了中断，这时候，中断信号没有立刻得到响应，软件仍然在内核态执行低优先级任务系统调用的代码。</p>
+</li>
+<li><p>在T1时刻，内核态代码由于退出临界区而打开中断，中断一旦打开，立刻跳转到了异常向量地址，interrupt handler抢占了低优先级任务的执行，进入中断上下文。</p>
+</li>
+<li><p>从CPU开始处理中断到具体中断服务程序被执行还需要一个分发的过程。这个期间系统要做的主要操作包括确定HW interrupt ID，确定IRQ Number，ack或者mask中断，调用中断服务程序等。</p>
+<p>T0到T2之间的delay被称为中断延迟（Interrupt Latency），主要包括两部分，一部分是HW造成的delay（硬件的中断系统识别外部的中断事件并signal到CPU），另外一部分是软件原因（内核代码中由于要保护临界区而关闭中断引起的）。</p>
+</li>
+<li><p>该中断的服务程序执行完毕（在其执行过程中，T3时刻，会唤醒高优先级任务，让它从sleep状态进入runable状态），返回低优先级任务的系统调用现场，这时候并不存在一个抢占点，低优先级任务要完成系统调用之后，在返回用户空间的时候才出现抢占点。</p>
+<p>漫长的等待之后，T4时刻，调度器调度高优先级任务执行。有一个术语叫做任务响应时间（Task Response Time）用来描述T3到T4之间的delay。</p>
+</li>
+</ul>
+<h4 id="抢占式linux内核的实时性"><a href="#抢占式linux内核的实时性" class="headerlink" title="抢占式linux内核的实时性"></a>抢占式linux内核的实时性</h4><p>2.6内核和2.4内核显著的不同是提供了一个CONFIG_PREEMPT的选项，打开该选项后，linux kernel就支持了内核代码的抢占（当然不能在临界区），其行为如下：</p>
+<p><img src="http://www.wowotech.net/content/uploadfile/201409/5d3893a4997db31f1bcbec9c8446b98020140922103329.gif" alt="pre"></p>
+<p>0到T3的操作都是和上一节的描述一样的，不同的地方是在T4。</p>
+<p>对于2.4内核，只有返回用户空间的时候才有抢占点出现，但是对于抢占式内核而言，即便是从中断上下文返回内核空间的进程上下文，只要内核代码不在临界区内，就可以发生调度，让最高优先级的任务调度执行。</p>
+<p>参考： <a class="link"   target="_blank" rel="noopener" href="http://www.wowotech.net/irq_subsystem/request_threaded_irq.html" >http://www.wowotech.net/irq_subsystem/request_threaded_irq.html<i class="fas fa-external-link-alt"></i></a></p>
 
         </div>
 
@@ -421,7 +444,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A9%B1%E5%8A%A8%E7%94%B3%E8%AF%B7%E4%B8%AD%E6%96%ADAPI"><span class="nav-text">驱动申请中断API</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A9%B1%E5%8A%A8%E7%94%B3%E8%AF%B7%E4%B8%AD%E6%96%ADAPI"><span class="nav-text">驱动申请中断API</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%9E%E6%8A%A2%E5%8D%A0%E5%BC%8Flinux%E5%86%85%E6%A0%B8%E7%9A%84%E5%AE%9E%E6%97%B6%E6%80%A7"><span class="nav-text">非抢占式linux内核的实时性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%A2%E5%8D%A0%E5%BC%8Flinux%E5%86%85%E6%A0%B8%E7%9A%84%E5%AE%9E%E6%97%B6%E6%80%A7"><span class="nav-text">抢占式linux内核的实时性</span></a></li></ol></li></ol></li></ol>
     </div>
 </div>
         </aside>
