@@ -186,7 +186,7 @@
 <p>2、machine driver对应的中断处理handler中会根据硬件的信息获取HW interrupt ID，并且通过irq domain模块翻译成IRQ number</p>
 <p>3、调用该IRQ number对应的high level irq event handler，在这个high level的handler中，会通过和interupt controller交互，进行中断处理的flow control（处理中断的嵌套、抢占等），当然最终会遍历该中断描述符的IRQ action list，调用外设的specific handler来处理该中断</p>
 <p>4、具体CPU architecture相关的模块会进行现场恢复。</p>
-<h2 id="驱动申请中断API"><a href="#驱动申请中断API" class="headerlink" title="驱动申请中断API"></a>驱动申请中断API</h2><h4 id="非抢占式linux内核的实时性"><a href="#非抢占式linux内核的实时性" class="headerlink" title="非抢占式linux内核的实时性"></a>非抢占式linux内核的实时性</h4><p><img src="http://www.wowotech.net/content/uploadfile/201409/89cc8133ade45f46ce400d3d2d74ce6f20140922103326.gif" alt="sxw"></p>
+<h2 id="驱动申请中断API"><a href="#驱动申请中断API" class="headerlink" title="驱动申请中断API"></a>驱动申请中断API</h2><h4 id="非抢占式linux内核的实时性"><a href="#非抢占式linux内核的实时性" class="headerlink" title="非抢占式linux内核的实时性"></a>非抢占式linux内核的实时性</h4><p><img src="https://s2.loli.net/2022/07/22/E1KYn9ipasFXkxm.gif" alt="sxw"></p>
 <ul>
 <li><p>高优先级任务（橘色block）由于要等待外部事件（例如网络数据）而进入睡眠，调度器调度了某个低优先级的任务（紫色block）执行。</p>
 </li>
@@ -206,7 +206,7 @@
 </li>
 </ul>
 <h4 id="抢占式linux内核的实时性"><a href="#抢占式linux内核的实时性" class="headerlink" title="抢占式linux内核的实时性"></a>抢占式linux内核的实时性</h4><p>2.6内核和2.4内核显著的不同是提供了一个CONFIG_PREEMPT的选项，打开该选项后，linux kernel就支持了内核代码的抢占（当然不能在临界区），其行为如下：</p>
-<p><img src="http://www.wowotech.net/content/uploadfile/201409/5d3893a4997db31f1bcbec9c8446b98020140922103329.gif" alt="pre"></p>
+<p><img src="https://s2.loli.net/2022/07/22/phzSRCqKfo9NAru.gif" alt="pre"></p>
 <p>0到T3的操作都是和上一节的描述一样的，不同的地方是在T4。</p>
 <p>对于2.4内核，只有返回用户空间的时候才有抢占点出现，但是对于抢占式内核而言，即便是从中断上下文返回内核空间的进程上下文，只要内核代码不在临界区内，就可以发生调度，让最高优先级的任务调度执行。</p>
 <p>参考： <a class="link"   target="_blank" rel="noopener" href="http://www.wowotech.net/irq_subsystem/request_threaded_irq.html" >http://www.wowotech.net/irq_subsystem/request_threaded_irq.html<i class="fas fa-external-link-alt"></i></a></p>
