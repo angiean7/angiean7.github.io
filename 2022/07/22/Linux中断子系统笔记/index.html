@@ -177,7 +177,17 @@
         
 
         <div class="article-content markdown-body">
-            
+            <p>在linux kernel中，对于每一个外设的IRQ都用struct irq_desc来描述，我们称之中断描述符（struct irq_desc）。</p>
+<p>linux kernel中会有一个数据结构保存了关于所有IRQ的中断描述符信息，我们称之中断描述符DB（图中红色框图内）。</p>
+<p>当发生中断后，首先获取触发中断的HW interupt ID，然后通过irq domain翻译成IRQ nuber，然后通过IRQ number就可以获取对应的中断描述符。</p>
+<p><img src="https://s2.loli.net/2022/07/22/7LlN6ob2VReZ4xn.gif" alt="img"></p>
+<p>当外设触发一次中断后，一个大概的处理过程是：</p>
+<p>1、具体CPU architecture相关的模块会进行现场保护，然后调用machine driver对应的中断处理handler</p>
+<p>2、machine driver对应的中断处理handler中会根据硬件的信息获取HW interrupt ID，并且通过irq domain模块翻译成IRQ number</p>
+<p>3、调用该IRQ number对应的high level irq event handler，在这个high level的handler中，会通过和interupt controller交互，进行中断处理的flow control（处理中断的嵌套、抢占等），当然最终会遍历该中断描述符的IRQ action list，调用外设的specific handler来处理该中断</p>
+<p>4、具体CPU architecture相关的模块会进行现场恢复。</p>
+<h2 id="驱动申请中断API"><a href="#驱动申请中断API" class="headerlink" title="驱动申请中断API"></a>驱动申请中断API</h2><p>参考： <a class="link"   target="_blank" rel="noopener" href="http://www.wowotech.net/irq_subsystem/request_threaded_irq.html" >http://www.wowotech.net/irq_subsystem/request_threaded_irq.html<i class="fas fa-external-link-alt"></i></a></p>
+
         </div>
 
         
@@ -411,7 +421,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A9%B1%E5%8A%A8%E7%94%B3%E8%AF%B7%E4%B8%AD%E6%96%ADAPI"><span class="nav-text">驱动申请中断API</span></a></li></ol>
     </div>
 </div>
         </aside>
