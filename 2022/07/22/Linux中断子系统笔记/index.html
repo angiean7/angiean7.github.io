@@ -209,6 +209,7 @@
 <p><img src="https://s2.loli.net/2022/07/22/phzSRCqKfo9NAru.gif" alt="pre"></p>
 <p>0到T3的操作都是和上一节的描述一样的，不同的地方是在T4。</p>
 <p>对于2.4内核，只有返回用户空间的时候才有抢占点出现，但是对于抢占式内核而言，即便是从中断上下文返回内核空间的进程上下文，只要内核代码不在临界区内，就可以发生调度，让最高优先级的任务调度执行。</p>
+<p>在Linux kernel中，一个外设的中断处理被分成top half和bottom half，top half进行最关键，最基本的处理，而比较耗时的操作被放到bottom half（softirq、tasklet）中延迟执行。虽然bottom half被延迟执行，但始终都是先于进程执行的。为何不让这些耗时的bottom half和普通进程公平竞争呢？因此，linux kernel借鉴了RTOS的某些特性，对那些耗时的驱动interrupt handler进行线程化处理，在内核的抢占点上，让线程（无论是内核线程还是用户空间创建的线程，还是驱动的interrupt thread）在一个舞台上竞争CPU。</p>
 <p>参考： <a class="link"   target="_blank" rel="noopener" href="http://www.wowotech.net/irq_subsystem/request_threaded_irq.html" >http://www.wowotech.net/irq_subsystem/request_threaded_irq.html<i class="fas fa-external-link-alt"></i></a></p>
 
         </div>
