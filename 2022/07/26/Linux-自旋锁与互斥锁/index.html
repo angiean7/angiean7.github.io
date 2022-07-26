@@ -9,7 +9,7 @@
 
     <title>
         
-            Linux中断子系统笔记 |
+            Linux-自旋锁与互斥锁 |
         
         Angie An
     </title>
@@ -131,7 +131,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">Linux中断子系统笔记</span>
+            <span class="title-hover-animation">Linux-自旋锁与互斥锁</span>
         </div>
 
         
@@ -148,8 +148,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2022-07-22 11:28:09</span>
-        <span class="mobile">2022-07-22 11:28</span>
+        <span class="pc">2022-07-26 16:27:04</span>
+        <span class="mobile">2022-07-26 16:27</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -157,7 +157,7 @@
             <ul>
                 
                     <li>
-                        <a href="/categories/Linux-Kernel/">-Linux Kernel</a>&nbsp;
+                        <a href="/categories/Linux-C/">-Linux C</a>&nbsp;
                     </li>
                 
             </ul>
@@ -177,40 +177,48 @@
         
 
         <div class="article-content markdown-body">
-            <p>在linux kernel中，对于每一个外设的IRQ都用struct irq_desc来描述，我们称之中断描述符（struct irq_desc）。</p>
-<p>linux kernel中会有一个数据结构保存了关于所有IRQ的中断描述符信息，我们称之中断描述符DB（图中红色框图内）。</p>
-<p>当发生中断后，首先获取触发中断的HW interupt ID，然后通过irq domain翻译成IRQ nuber，然后通过IRQ number就可以获取对应的中断描述符。</p>
-<p><img src="https://s2.loli.net/2022/07/22/7LlN6ob2VReZ4xn.gif" alt="img"></p>
-<p>当外设触发一次中断后，一个大概的处理过程是：</p>
-<p>1、具体CPU architecture相关的模块会进行现场保护，然后调用machine driver对应的中断处理handler</p>
-<p>2、machine driver对应的中断处理handler中会根据硬件的信息获取HW interrupt ID，并且通过irq domain模块翻译成IRQ number</p>
-<p>3、调用该IRQ number对应的high level irq event handler，在这个high level的handler中，会通过和interupt controller交互，进行中断处理的flow control（处理中断的嵌套、抢占等），当然最终会遍历该中断描述符的IRQ action list，调用外设的specific handler来处理该中断</p>
-<p>4、具体CPU architecture相关的模块会进行现场恢复。</p>
-<h2 id="驱动申请中断API"><a href="#驱动申请中断API" class="headerlink" title="驱动申请中断API"></a>驱动申请中断API</h2><h4 id="非抢占式linux内核的实时性"><a href="#非抢占式linux内核的实时性" class="headerlink" title="非抢占式linux内核的实时性"></a>非抢占式linux内核的实时性</h4><p><img src="https://s2.loli.net/2022/07/22/E1KYn9ipasFXkxm.gif" alt="sxw"></p>
+            <h1 id="自旋锁和互斥锁的区别"><a href="#自旋锁和互斥锁的区别" class="headerlink" title="自旋锁和互斥锁的区别"></a>自旋锁和互斥锁的区别</h1><p>POSIX threads(简称Pthreads)是在多核平台上进行并行编程的一套API。线程同步是并行编程中非常重要的通讯手段，其中最典型的应用就是用Pthreads提供的锁机制(lock)来对多个线程之间的共享临界区(Critical Section)进行保护(另一种常用的同步机制是barrier)。</p>
+<p>Pthreads提供了多种锁机制：</p>
 <ul>
-<li><p>高优先级任务（橘色block）由于要等待外部事件（例如网络数据）而进入睡眠，调度器调度了某个低优先级的任务（紫色block）执行。</p>
-</li>
-<li><p>该低优先级任务欢畅的执行，直到触发了一次系统调用（例如通过read()文件接口读取磁盘上的文件等）而进入了内核态，从user space切换到了kernel space。</p>
-</li>
-<li><p>T0时刻，高优先级任务等待的那个中断事件发生了。</p>
-</li>
-<li><p>中断虽然发生了，但软件不一定立刻响应，可能由于在内核态执行的某些操作（在临界区内）不希望被外部事件打断而主动关闭了中断，这时候，中断信号没有立刻得到响应，软件仍然在内核态执行低优先级任务系统调用的代码。</p>
-</li>
-<li><p>在T1时刻，内核态代码由于退出临界区而打开中断，中断一旦打开，立刻跳转到了异常向量地址，interrupt handler抢占了低优先级任务的执行，进入中断上下文。</p>
-</li>
-<li><p>从CPU开始处理中断到具体中断服务程序被执行还需要一个分发的过程。这个期间系统要做的主要操作包括确定HW interrupt ID，确定IRQ Number，ack或者mask中断，调用中断服务程序等。</p>
-<p>T0到T2之间的delay被称为中断延迟（Interrupt Latency），主要包括两部分，一部分是HW造成的delay（硬件的中断系统识别外部的中断事件并signal到CPU），另外一部分是软件原因（内核代码中由于要保护临界区而关闭中断引起的）。</p>
-</li>
-<li><p>该中断的服务程序执行完毕（在其执行过程中，T3时刻，会唤醒高优先级任务，让它从sleep状态进入runable状态），返回低优先级任务的系统调用现场，这时候并不存在一个抢占点，低优先级任务要完成系统调用之后，在返回用户空间的时候才出现抢占点。</p>
-<p>漫长的等待之后，T4时刻，调度器调度高优先级任务执行。有一个术语叫做任务响应时间（Task Response Time）用来描述T3到T4之间的delay。</p>
-</li>
+<li>Mutex(互斥量)：pthread_mutex_t</li>
+<li>Spin lock(自旋锁): pthread_spin_t</li>
+<li>Condition Variable(条件变量): pthread_cond_t</li>
+<li>Read/Write lock(读写锁)：pthread_rwlock_t</li>
 </ul>
-<h4 id="抢占式linux内核的实时性"><a href="#抢占式linux内核的实时性" class="headerlink" title="抢占式linux内核的实时性"></a>抢占式linux内核的实时性</h4><p>2.6内核和2.4内核显著的不同是提供了一个CONFIG_PREEMPT的选项，打开该选项后，linux kernel就支持了内核代码的抢占（当然不能在临界区），其行为如下：</p>
-<p><img src="https://s2.loli.net/2022/07/22/phzSRCqKfo9NAru.gif" alt="pre"></p>
-<p>0到T3的操作都是和上一节的描述一样的，不同的地方是在T4。</p>
-<p>对于2.4内核，只有返回用户空间的时候才有抢占点出现，但是对于抢占式内核而言，即便是从中断上下文返回内核空间的进程上下文，只要内核代码不在临界区内，就可以发生调度，让最高优先级的任务调度执行。</p>
-<p>在Linux kernel中，一个外设的中断处理被分成top half和bottom half，top half进行最关键，最基本的处理，而比较耗时的操作被放到bottom half（softirq、tasklet）中延迟执行。虽然bottom half被延迟执行，但始终都是先于进程执行的。为何不让这些耗时的bottom half和普通进程公平竞争呢？因此，linux kernel借鉴了RTOS的某些特性，对那些耗时的驱动interrupt handler进行线程化处理，在内核的抢占点上，让线程（无论是内核线程还是用户空间创建的线程，还是驱动的interrupt thread）在一个舞台上竞争CPU。</p>
-<p>参考： <a class="link"   target="_blank" rel="noopener" href="http://www.wowotech.net/irq_subsystem/request_threaded_irq.html" >http://www.wowotech.net/irq_subsystem/request_threaded_irq.html<i class="fas fa-external-link-alt"></i></a></p>
+<p>Pthreads提供的Mutex锁操作相关的API主要有：</p>
+<ul>
+<li>pthread_mutex_lock(pthread_mutex_t *mutex);</li>
+<li>pthread_mutex_trylock(pthread_mutex_t *mutex);</li>
+<li>pthread_mutex_unlock(pthread_mutex_t *mutex);</li>
+</ul>
+<p>Pthreads提供的Spin Lock锁操作相关的API主要有：</p>
+<ul>
+<li>pthread_spin_lock(pthread_spinlock_t *lock);</li>
+<li>pthread_spin_trylock(pthread_spinlock_t *lock);</li>
+<li>pthread_spin_unlock(pthread_spinlock_t *lock);</li>
+</ul>
+<p>从实现原理上来讲，<strong>Mutex（互斥锁）属于sleep-waiting类型的锁</strong>。例如在一个双核的机器上有两个线程（线程A和线程B）,它们分别运行在Core0和Core1上。假设线程A想要通过pthread_mutex_lock操作去得到一个临界区的锁，而此时这个锁正被线程B所持有，那么线程A就会被阻塞，</p>
+<p>Core0会在此时进行上下文切换(Context Switch)将线程A置于等待队列中，此时Core0就可以运行其它的任务而不必进行忙等待。而<strong>Spin lock（自旋锁）</strong>则不然，它属于<strong>busy-waiting类型的锁</strong>，如果线程A是使用pthread_spin_lock操作去请求锁，那么线程A就会一直在Core0上进行忙等待并不停的进行锁请求，直到得到这个锁为止。</p>
+<p><strong>自旋锁（Spin lock）</strong></p>
+<p>自旋锁与<a class="link"   target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=互斥锁&spm=1001.2101.3001.7020" >互斥锁<i class="fas fa-external-link-alt"></i></a>有点类似，只是自旋锁不会引起调用者睡眠，如果自旋锁已经被别的执行单元保持，调用者就一直循环在那里看是否该自旋锁的保持者已经释放了锁，<strong>“自旋锁”的作用是为了解决某项资源的互斥使用。因为自旋锁不会引起调用者睡眠，所以自旋锁的效率远高于互斥锁。</strong></p>
+<p>自旋锁的不足之处：</p>
+<p><strong>自旋锁一直占用着CPU，他在未获得锁的情况下，一直运行（自旋），所以占用着CPU，如果不能在很短的时间内获得锁，这无疑会使CPU效率降低。</strong></p>
+<p>在用自旋锁时有可能造成死锁，当递归调用时有可能造成死锁，调用有些其他函数也可能造成死锁，如 copy_to_user()、copy_from_user()、kmalloc()等。</p>
+<p>因此我们要慎重使用自旋锁，自旋锁只有在内核可抢占式或SMP的情况下才真正需要，在单CPU且不可抢占式的内核下，自旋锁的操作为空操作。自旋锁适用于锁使用者保持锁时间比较短的情况下。</p>
+<h2 id="自旋锁-原理"><a href="#自旋锁-原理" class="headerlink" title="自旋锁-原理"></a>自旋锁-原理</h2><p>跟<a class="link"   target="_blank" rel="noopener" href="https://baike.so.com/doc/6150631-6363825.html" >互斥锁<i class="fas fa-external-link-alt"></i></a>一样，一个执行单元要想访问被自旋锁保护的共享资源，必须<strong>先得到锁，在访问完共享资源后，必须释放锁</strong>。如果在获取自旋锁时，没有任何执行单元保持该锁，那么将立即得到锁;如果在获取自旋锁时锁已经有保持者，那么获取锁操作将自旋在那里，直到该自旋锁的保持者释放了锁。由此我们可以看出，自旋锁是一种比较低级的保护数据结构或代码片段的原始方式，这种锁可能存在两个问题:</p>
+<p>1、<a class="link"   target="_blank" rel="noopener" href="https://baike.so.com/doc/414521-439063.html" >死锁<i class="fas fa-external-link-alt"></i></a>。<strong>试图递归地获得自旋锁必然会引起死锁</strong>:递归程序的持有实例在第二个实例循环，以试图获得相同自旋锁时，不会释放此自旋锁。</p>
+<p>在递归程序中使用自旋锁应遵守下列策略:</p>
+<p>递归程序决不能在持有自旋锁时调用它自己，也决不能在<a class="link"   target="_blank" rel="noopener" href="https://baike.so.com/doc/6115126-6328268.html" >递归调用<i class="fas fa-external-link-alt"></i></a>时试图获得相同的自旋锁。此外如果一个进程已经将资源锁定，那么，即使其它申请这个资源的进程不停地疯狂”自旋”,也无法获得资源，从而进入死循环。</p>
+<p>2、过多占用cpu资源。如果不加限制，由于申请者一直在循环等待，因此自旋锁在锁定的时候,如果不成功,不会睡眠,会持续的尝试,单cpu的时候自旋锁会让其它process动不了. 因此，一般自旋锁实现会有一个参数限定最多持续尝试次数. 超出后, 自旋锁放弃当前time slice. 等下一次机会</p>
+<p>由此可见，<strong>自旋锁</strong>比较<strong>适用于</strong>锁使用者<strong>保持锁时间比较短</strong>的情况。正是由于自旋锁使用者一般保持锁时间非常短，因此选择自旋而不是睡眠是非常必要的，自旋锁的效率远高于<a class="link"   target="_blank" rel="noopener" href="https://baike.so.com/doc/6150631-6363825.html" >互斥锁<i class="fas fa-external-link-alt"></i></a>。<a class="link"   target="_blank" rel="noopener" href="https://baike.so.com/doc/6799211-7016022.html" >信号量<i class="fas fa-external-link-alt"></i></a>和读写信号量适合于保持时间较长的情况，它们会导致调用者睡眠，因此只能在<a class="link"   target="_blank" rel="noopener" href="https://baike.so.com/doc/2315046-2448796.html" >进程上下文<i class="fas fa-external-link-alt"></i></a>使用，而自旋锁适合于保持时间非常短的情况，它可以在任何上下文使用。如果被保护的共享资源只在进程上下文访问，使用信号量保护该共享资源非常合适，如果对共享资源的访问时间非常短，自旋锁也可以。但是如果被保护的共享资源需要在中断上下文访问(包括底半部即<a class="link"   target="_blank" rel="noopener" href="https://baike.so.com/doc/4973549-5196235.html" >中断处理<i class="fas fa-external-link-alt"></i></a>句柄和顶半部即<a class="link"   target="_blank" rel="noopener" href="https://baike.so.com/doc/7715429-7989524.html" >软中断<i class="fas fa-external-link-alt"></i></a>)，就必须使用自旋锁。<strong>自旋锁保持期间是抢占失效的，而信号量和读写信号量保持期间是可以被抢占的</strong>。自旋锁只有在<a class="link"   target="_blank" rel="noopener" href="https://baike.so.com/doc/665564-704577.html" >内核<i class="fas fa-external-link-alt"></i></a>可抢占或<a class="link"   target="_blank" rel="noopener" href="https://baike.so.com/doc/4522250-4732301.html" >SMP<i class="fas fa-external-link-alt"></i></a>(多处理器)的情况下才真正需要，在单CPU且不可抢占的内核下，自旋锁的所有操作都是空操作，</p>
+<h4 id="互斥锁与自旋锁的区别"><a href="#互斥锁与自旋锁的区别" class="headerlink" title="互斥锁与自旋锁的区别"></a>互斥锁与自旋锁的区别</h4><p>(1)、互斥锁mutex：独占锁；开销大</p>
+<p>pthread_mutex_lock(pthread_mutex_t *mutex);</p>
+<p>pthread_mutex_unlock(pthread_mutex_t *mutex);</p>
+<p>(2)、自旋锁spin lock：轻量级的锁，开销小；适用于短时间内对锁的使用。</p>
+<p>如果自旋锁已经被其他的执行单元保持，调用者就一直循环在那里判断该自旋锁是否被释放</p>
+<p>pthread_spin_lock(pthread_spinlock_t *lock);</p>
+<p>pthread_spin_unlock(pthread_spinlock_t *lock);</p>
+<p>注意：对于spin lock，如果递归调用过深，会导致死锁。</p>
 
         </div>
 
@@ -224,13 +232,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/2022/07/26/Linux-%E8%87%AA%E6%97%8B%E9%94%81%E4%B8%8E%E4%BA%92%E6%96%A5%E9%94%81/"
+                           href="/2022/07/26/Linux-%E4%B8%AD%E6%96%AD%E4%B8%8A%E4%B8%8B%E6%96%87/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">Linux-自旋锁与互斥锁</span>
+                                <span class="post-nav-title-item">Linux-中断上下部分(top half、bottom half)</span>
                                 <span class="post-nav-item">Prev posts</span>
                             </span>
                         </a>
@@ -240,10 +248,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2022/07/21/%E6%97%A5%E8%AF%AD%E7%AC%94%E8%AE%B0/"
+                           href="/2022/07/22/Linux%E4%B8%AD%E6%96%AD%E5%AD%90%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">日语笔记</span>
+                                <span class="post-nav-title-item">Linux中断子系统笔记</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -460,7 +468,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A9%B1%E5%8A%A8%E7%94%B3%E8%AF%B7%E4%B8%AD%E6%96%ADAPI"><span class="nav-text">驱动申请中断API</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%9E%E6%8A%A2%E5%8D%A0%E5%BC%8Flinux%E5%86%85%E6%A0%B8%E7%9A%84%E5%AE%9E%E6%97%B6%E6%80%A7"><span class="nav-text">非抢占式linux内核的实时性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%A2%E5%8D%A0%E5%BC%8Flinux%E5%86%85%E6%A0%B8%E7%9A%84%E5%AE%9E%E6%97%B6%E6%80%A7"><span class="nav-text">抢占式linux内核的实时性</span></a></li></ol></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%87%AA%E6%97%8B%E9%94%81%E5%92%8C%E4%BA%92%E6%96%A5%E9%94%81%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">自旋锁和互斥锁的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E6%97%8B%E9%94%81-%E5%8E%9F%E7%90%86"><span class="nav-text">自旋锁-原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%92%E6%96%A5%E9%94%81%E4%B8%8E%E8%87%AA%E6%97%8B%E9%94%81%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">互斥锁与自旋锁的区别</span></a></li></ol></li></ol></li></ol></li></ol>
     </div>
 </div>
         </aside>

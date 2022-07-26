@@ -179,6 +179,86 @@
                 
 
                 <h3 class="home-article-title">
+                    <a href="/2022/07/26/Linux-%E4%B8%AD%E6%96%AD%E4%B8%8A%E4%B8%8B%E6%96%87/">
+                        Linux-中断上下部分(top half、bottom half)
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        中断处理程序处于中断上下文，而中断上下文是不参与调度的，这样中断上下文不能出现可能休眠的操作，因为中断上下文一旦休眠就会交出cpu，而中断上下文不参与调度，也就是交出cpu时不会保存上下文，这样一旦交出cpu就永远不会回来了。这也就决定了在中断中不能...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Jul 26 2022 17:10:03 GMT+0800">2022-07-26</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/Linux-C/">-Linux C</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/2022/07/26/Linux-%E4%B8%AD%E6%96%AD%E4%B8%8A%E4%B8%8B%E6%96%87/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2022/07/26/Linux-%E8%87%AA%E6%97%8B%E9%94%81%E4%B8%8E%E4%BA%92%E6%96%A5%E9%94%81/">
+                        Linux-自旋锁与互斥锁
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        自旋锁和互斥锁的区别POSIX threads(简称Pthreads)是在多核平台上进行并行编程的一套API。线程同步是并行编程中非常重要的通讯手段，其中最典型的应用就是用Pthreads提供的锁机制(lock)来对多个线程之间的共享临界区(Crit...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Jul 26 2022 16:27:04 GMT+0800">2022-07-26</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/Linux-C/">-Linux C</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/2022/07/26/Linux-%E8%87%AA%E6%97%8B%E9%94%81%E4%B8%8E%E4%BA%92%E6%96%A5%E9%94%81/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
                     <a href="/2022/07/22/Linux%E4%B8%AD%E6%96%AD%E5%AD%90%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0/">
                         Linux中断子系统笔记
                     </a>
@@ -485,101 +565,6 @@ E 115200...
     </div>
 
     <a href="/2022/03/30/Linux%E4%BD%BF%E7%94%A8%E4%B8%B2%E5%8F%A3%E5%B7%A5%E5%85%B7/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/03/30/Linux%E8%BF%90%E8%A1%8Capp%E5%B8%A6%E5%8F%82%E6%95%B0%20getopt/">
-                        Linux运行app带参数 [getopt]
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        Linux运行app带参数 getopt头文件：#include &lt;getopt.h&gt;
-main函数中：
-123456789101112131415161718192021222324252627282930313233343536373...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Mar 30 2022 13:05:03 GMT+0800">2022-03-30</span></span>
-        
-            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/categories/Linux-C/">-Linux C</a>&nbsp;
-                        </li>
-                    
-                    
-                </ul>
-            </span>
-        
-        
-    </div>
-
-    <a href="/2022/03/30/Linux%E8%BF%90%E8%A1%8Capp%E5%B8%A6%E5%8F%82%E6%95%B0%20getopt/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/03/29/vscode%E5%BF%AB%E6%8D%B7%E9%94%AE/">
-                        vscode 快捷键
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        vscode 快捷键基础编辑 Basic editing
-
-
-按 Press
-功能 Function
-
-
-
-Ctrl+X
-剪切行（空选定） Cut line (empty selection)
-
-
-Ctrl+C
-复制行（空选定）Copy line (...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Mar 29 2022 17:55:15 GMT+0800">2022-03-29</span></span>
-        
-            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/categories/Linux-C/">-Linux C</a>&nbsp;
-                        </li>
-                    
-                    
-                </ul>
-            </span>
-        
-        
-    </div>
-
-    <a href="/2022/03/29/vscode%E5%BF%AB%E6%8D%B7%E9%94%AE/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
