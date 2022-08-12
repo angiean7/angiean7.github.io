@@ -9,7 +9,7 @@
 
     <title>
         
-            Linux-基本原子操作 atomic |
+            C言語 struct bit ビットフィールド |
         
         Angie An
     </title>
@@ -431,7 +431,7 @@ $logo-image-box-width = 46px;
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">Linux-基本原子操作 atomic</span>
+            <span class="title-hover-animation">C言語 struct bit ビットフィールド</span>
         </div>
 
         
@@ -511,45 +511,35 @@ $logo-image-box-width = 46px;
         
 
         <div class="article-content markdown-body">
-            <p>原子操作主要用于实现资源计数，很多引用计数(refcnt)就是通过原子操作实现的。原子类型定义如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> </span></span><br><span class="line"><span class="class">&#123;</span> </span><br><span class="line">   <span class="keyword">volatile</span> <span class="type">int</span> counter; </span><br><span class="line">&#125; </span><br><span class="line"><span class="type">atomic_t</span>;</span><br></pre></td></tr></table></figure>
+            <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* ビットフィールドを宣言 */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">bit</span>&#123;</span></span><br><span class="line">      <span class="type">unsigned</span> <span class="type">int</span> b1 : <span class="number">1</span>;</span><br><span class="line">      <span class="type">unsigned</span> <span class="type">int</span> b2 : <span class="number">2</span>;</span><br><span class="line">      <span class="type">unsigned</span> <span class="type">int</span> b3 : <span class="number">3</span>;</span><br><span class="line">      <span class="type">unsigned</span> <span class="type">int</span> b4 : <span class="number">4</span>;</span><br><span class="line">      <span class="type">unsigned</span> <span class="type">int</span> b5 : <span class="number">5</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> widthValidated : <span class="number">1</span>;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> heightValidated : <span class="number">1</span>;</span><br><span class="line">&#125; status;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>volatile修饰字段告诉gcc不要对该类型的数据做优化处理，对它的访问都是对内存的访问，而不是对寄存器的访问。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">atomic_inc</span>(&amp;v)对变量v用锁定总线的单指令进行不可分解的<span class="string">&quot;原子&quot;</span>级增量操作，避免v的值由于中断或多处理器同时操作造成不确定状态。</span><br><span class="line"></span><br><span class="line">原子操作API包括： </span><br><span class="line"> </span><br><span class="line"><span class="type">int</span> <span class="title function_">atomic_read</span><span class="params">(<span class="type">atomic_t</span> * v)</span>;</span><br><span class="line"> </span><br><span class="line">　　该函数对原子类型的变量进行原子读操作，它返回原子类型的变量v的值。 </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="type">void</span> <span class="title function_">atomic_set</span><span class="params">(<span class="type">atomic_t</span> * v, <span class="type">int</span> i)</span>;</span><br><span class="line"> </span><br><span class="line">　　该函数设置原子类型的变量v的值为i。 </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="type">void</span> <span class="title function_">atomic_add</span><span class="params">(<span class="type">int</span> i, <span class="type">atomic_t</span> *v)</span>;</span><br><span class="line"> </span><br><span class="line">　　该函数给原子类型的变量v增加值i。 </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="type">void</span> <span class="title function_">atomic_sub</span><span class="params">(<span class="type">int</span> i, <span class="type">atomic_t</span> *v)</span>;</span><br><span class="line"> </span><br><span class="line">　　该函数从原子类型的变量v中减去i。 </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="type">int</span> <span class="title function_">atomic_sub_and_test</span><span class="params">(<span class="type">int</span> i, <span class="type">atomic_t</span> *v)</span>;</span><br><span class="line"> </span><br><span class="line">　　该函数从原子类型的变量v中减去i，并判断结果是否为<span class="number">0</span>，如果为<span class="number">0</span>，返回真，否则返回假。 </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="type">void</span> <span class="title function_">atomic_inc</span><span class="params">(<span class="type">atomic_t</span> *v)</span>;</span><br><span class="line"> </span><br><span class="line">　　该函数对原子类型变量v原子地增加<span class="number">1</span>。 </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="type">void</span> <span class="title function_">atomic_dec</span><span class="params">(<span class="type">atomic_t</span> *v)</span>;</span><br><span class="line"> </span><br><span class="line">　　该函数对原子类型的变量v原子地减<span class="number">1</span>。 </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="type">int</span> <span class="title function_">atomic_dec_and_test</span><span class="params">(<span class="type">atomic_t</span> *v)</span>;</span><br><span class="line"> </span><br><span class="line">　　该函数对原子类型的变量v原子地减<span class="number">1</span>，并判断结果是否为<span class="number">0</span>，如果为<span class="number">0</span>，返回真，否则返回假。 </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="type">int</span> <span class="title function_">atomic_inc_and_test</span><span class="params">(<span class="type">atomic_t</span> *v)</span>;</span><br><span class="line"> </span><br><span class="line">　　该函数对原子类型的变量v原子地增加<span class="number">1</span>，并判断结果是否为<span class="number">0</span>，如果为<span class="number">0</span>，返回真，否则返回假。 </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="type">int</span> <span class="title function_">atomic_add_negative</span><span class="params">(<span class="type">int</span> i, <span class="type">atomic_t</span> *v)</span>;</span><br><span class="line"> </span><br><span class="line">　　该函数对原子类型的变量v原子地增加I，并判断结果是否为负数，如果是，返回真，否则返回假。 </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="type">int</span> <span class="title function_">atomic_add_return</span><span class="params">(<span class="type">int</span> i, <span class="type">atomic_t</span> *v)</span>;</span><br><span class="line"> </span><br><span class="line">　　该函数对原子类型的变量v原子地增加i，并且返回指向v的指针。 </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="type">int</span> <span class="title function_">atomic_sub_return</span><span class="params">(<span class="type">int</span> i, <span class="type">atomic_t</span> *v)</span>;</span><br><span class="line"> </span><br><span class="line">　　该函数从原子类型的变量v中减去i，并且返回指向v的指针。 </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="type">int</span> <span class="title function_">atomic_inc_return</span><span class="params">(<span class="type">atomic_t</span> * v)</span>;</span><br><span class="line"> </span><br><span class="line">　　该函数对原子类型的变量v原子地增加<span class="number">1</span>并且返回指向v的指针。 </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="type">int</span> <span class="title function_">atomic_dec_return</span><span class="params">(<span class="type">atomic_t</span> * v)</span>;</span><br><span class="line">　　该函数对原子类型的变量v原子地减<span class="number">1</span>并且返回指向v的指针。 </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p> 基本操作：</p>
+<p>位域列表的形式为：</p>
+<p>type [member_name] : width ;</p>
+<p>下面是有关位域中变量元素的描述：</p>
 <table>
 <thead>
 <tr>
-<th>宏或者函数</th>
-<th>说明</th>
+<th align="left">元素</th>
+<th align="left">描述</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>atomic_read</td>
-<td>返回原子变量的值</td>
+<td align="left">type</td>
+<td align="left">只能为 int(整型)，unsigned int(无符号整型)，signed int(有符号整型) 三种类型，决定了如何解释位域的值。</td>
 </tr>
 <tr>
-<td>atomic_set</td>
-<td>设置原子变量的值。</td>
+<td align="left">member_name</td>
+<td align="left">位域的名称。</td>
 </tr>
 <tr>
-<td>atomic_add</td>
-<td>增加计数的值。(+i)</td>
-</tr>
-<tr>
-<td>atomic_sub</td>
-<td>减少计数的值。(-i)</td>
-</tr>
-<tr>
-<td>atomic_inc</td>
-<td>递增计数的值。(++)</td>
-</tr>
-<tr>
-<td>atomic_dec</td>
-<td>递减计数的值。(–)</td>
+<td align="left">width</td>
+<td align="left">位域中位的数量。宽度必须小于或等于指定类型的位宽度。</td>
 </tr>
 </tbody></table>
+<p>通常はバイト単位でしか変数を使えませんが、<br>これをビット単位で処理可能にする機能がビットフィールドです。</p>
+<p>キーワードは、構造体と同じく struct を使います。<br>記述法は、変数名の後に、コロンで区切って確保するビット数を指定します。</p>
+<p>確保される領域は、データ型の大きさによって変わります。</p>
+<p>また、プログラム内での使い方は、構造体と同じです。</p>
 
         </div>
 
@@ -560,29 +550,14 @@ $logo-image-box-width = 46px;
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2022/08/12/C-bit%20field/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">C言語 struct bit ビットフィールド</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2022/07/26/Linux-%E4%B8%AD%E6%96%AD%E4%B8%8A%E4%B8%8B%E6%96%87/"
+                           href="/2022/07/28/Linux-%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">Linux-中断上下部分(top half、bottom half)</span>
+                                <span class="post-nav-title-item">Linux-基本原子操作 atomic</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
