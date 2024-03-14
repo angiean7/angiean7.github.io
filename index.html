@@ -180,14 +180,15 @@
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2023/12/15/Linux-PCI%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8/">
-                        Linux-PCI网络设备驱动
+                    <a href="/2023/12/15/Linux-%E4%B8%AD%E6%96%AD%E4%B8%8A%E4%B8%8B%E6%96%87/">
+                        Linux-中断上下部分(top half、bottom half)
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
-                        Linux-PCI网络设备驱动1, 驱动模块的加载和卸载​    如果网络设备（包括wireless）是PCI规范的，则先是向内核注册该PCI设备(pci_register_driver)，然后由pci_driver数据结构中的probe函数指针所指...
+                        问题：linux系统中对中断的处理为什么会有上下部之分呢？
+中断处理程序处于中断上下文，而中断上下文是不参与调度的，这样中断上下文不能出现可能休眠的操作，因为中断上下文一旦休眠就会交出cpu，而中断上下文不参与调度，也就是交出cpu时不会保存上下文，...
                     
                 </div>
 
@@ -200,7 +201,7 @@
                     
                         <li>
                             
-                            <a href="/categories/Linux-drv/">Linux drv</a>&nbsp;
+                            <a href="/categories/Linux-C/">Linux C</a>&nbsp;
                         </li>
                     
                     
@@ -210,7 +211,7 @@
         
     </div>
 
-    <a href="/2023/12/15/Linux-PCI%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a href="/2023/12/15/Linux-%E4%B8%AD%E6%96%AD%E4%B8%8A%E4%B8%8B%E6%96%87/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -254,6 +255,46 @@ vola...
     </div>
 
     <a href="/2023/12/15/Linux-%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023/12/15/Linux-PCI%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8/">
+                        Linux-PCI网络设备驱动
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        Linux-PCI网络设备驱动1, 驱动模块的加载和卸载​    如果网络设备（包括wireless）是PCI规范的，则先是向内核注册该PCI设备(pci_register_driver)，然后由pci_driver数据结构中的probe函数指针所指...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Dec 15 2023 11:21:29 GMT+0900">2023-12-15</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/Linux-drv/">Linux drv</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/2023/12/15/Linux-PCI%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -344,15 +385,61 @@ linux kernel中会有一个数据结构保存了关于所有IRQ的中断描述�
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2023/12/15/Linux-%E4%B8%AD%E6%96%AD%E4%B8%8A%E4%B8%8B%E6%96%87/">
-                        Linux-中断上下部分(top half、bottom half)
+                    <a href="/2023/12/15/Linux%E4%BD%BF%E7%94%A8%E4%B8%B2%E5%8F%A3%E5%B7%A5%E5%85%B7/">
+                        Linux使用串口工具minicom
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
-                        问题：linux系统中对中断的处理为什么会有上下部之分呢？
-中断处理程序处于中断上下文，而中断上下文是不参与调度的，这样中断上下文不能出现可能休眠的操作，因为中断上下文一旦休眠就会交出cpu，而中断上下文不参与调度，也就是交出cpu时不会保存上下文，...
+                        Linux使用串口工具sudo apt-get install minicom
+安装好之后minicom运行软件
+按下ctrl+a然后再按z打开帮助
+按O进入配置页面
+A serial port setup中设置/dev/ttyS0
+E 115200...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Dec 15 2023 11:21:29 GMT+0900">2023-12-15</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E7%8E%AF%E5%A2%83/">环境</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/2023/12/15/Linux%E4%BD%BF%E7%94%A8%E4%B8%B2%E5%8F%A3%E5%B7%A5%E5%85%B7/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023/12/15/Linux%E8%BF%90%E8%A1%8Capp%E5%B8%A6%E5%8F%82%E6%95%B0%20getopt/">
+                        Linux运行app带参数 [getopt]
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        Linux运行app带参数 getopt头文件：#include &lt;getopt.h&gt;
+main函数中：
+123456789101112131415161718192021222324252627282930313233343536373...
                     
                 </div>
 
@@ -375,7 +462,7 @@ linux kernel中会有一个数据结构保存了关于所有IRQ的中断描述�
         
     </div>
 
-    <a href="/2023/12/15/Linux-%E4%B8%AD%E6%96%AD%E4%B8%8A%E4%B8%8B%E6%96%87/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a href="/2023/12/15/Linux%E8%BF%90%E8%A1%8Capp%E5%B8%A6%E5%8F%82%E6%95%B0%20getopt/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -468,16 +555,14 @@ linux kernel中会有一个数据结构保存了关于所有IRQ的中断描述�
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2023/12/15/Linux%E8%BF%90%E8%A1%8Capp%E5%B8%A6%E5%8F%82%E6%95%B0%20getopt/">
-                        Linux运行app带参数 [getopt]
+                    <a href="/2023/12/15/Xilinx%20%E4%B8%AD%E6%96%AD%E5%87%BD%E6%95%B0%E9%85%8D%E7%BD%AE/">
+                        Xilinx 中断函数配置
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
-                        Linux运行app带参数 getopt头文件：#include &lt;getopt.h&gt;
-main函数中：
-123456789101112131415161718192021222324252627282930313233343536373...
+                        Xilinx 中断函数配置1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606...
                     
                 </div>
 
@@ -490,7 +575,7 @@ main函数中：
                     
                         <li>
                             
-                            <a href="/categories/Linux-C/">Linux C</a>&nbsp;
+                            <a href="/categories/Xilinx/">Xilinx</a>&nbsp;
                         </li>
                     
                     
@@ -500,93 +585,7 @@ main函数中：
         
     </div>
 
-    <a href="/2023/12/15/Linux%E8%BF%90%E8%A1%8Capp%E5%B8%A6%E5%8F%82%E6%95%B0%20getopt/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2023/12/15/Linux%E4%BD%BF%E7%94%A8%E4%B8%B2%E5%8F%A3%E5%B7%A5%E5%85%B7/">
-                        Linux使用串口工具minicom
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        Linux使用串口工具sudo apt-get install minicom
-安装好之后minicom运行软件
-按下ctrl+a然后再按z打开帮助
-按O进入配置页面
-A serial port setup中设置/dev/ttyS0
-E 115200...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Dec 15 2023 11:21:29 GMT+0900">2023-12-15</span></span>
-        
-            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/categories/%E7%8E%AF%E5%A2%83/">环境</a>&nbsp;
-                        </li>
-                    
-                    
-                </ul>
-            </span>
-        
-        
-    </div>
-
-    <a href="/2023/12/15/Linux%E4%BD%BF%E7%94%A8%E4%B8%B2%E5%8F%A3%E5%B7%A5%E5%85%B7/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2023/12/15/WindowsOpenBoard%E6%B5%81%E7%A8%8B/">
-                        Windows OpenBoard流程
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        Windows OpenBoard流程which means 打开driver获得句柄的流程。
-1234HDEVINFO             hDevInfo;SP_INTERFACE_DEVICE_DATA     IfDevData;SP_I...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Dec 15 2023 11:21:29 GMT+0900">2023-12-15</span></span>
-        
-            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/categories/Windows/">Windows</a>&nbsp;
-                        </li>
-                    
-                    
-                </ul>
-            </span>
-        
-        
-    </div>
-
-    <a href="/2023/12/15/WindowsOpenBoard%E6%B5%81%E7%A8%8B/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a href="/2023/12/15/Xilinx%20%E4%B8%AD%E6%96%AD%E5%87%BD%E6%95%B0%E9%85%8D%E7%BD%AE/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
