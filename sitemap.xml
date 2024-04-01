@@ -256,13 +256,6 @@
 
   
   <url>
-    <loc>https://angiean7.github.io/categories/Windows/</loc>
-    <lastmod>2024-04-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://angiean7.github.io/categories/Linux-C/</loc>
     <lastmod>2024-04-01</lastmod>
     <changefreq>weekly</changefreq>
@@ -270,7 +263,7 @@
   </url>
   
   <url>
-    <loc>https://angiean7.github.io/categories/Linux-drv/</loc>
+    <loc>https://angiean7.github.io/categories/Windows/</loc>
     <lastmod>2024-04-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -291,6 +284,13 @@
   </url>
   
   <url>
+    <loc>https://angiean7.github.io/categories/Linux-drv/</loc>
+    <lastmod>2024-04-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://angiean7.github.io/categories/%E7%8E%AF%E5%A2%83/</loc>
     <lastmod>2024-04-01</lastmod>
     <changefreq>weekly</changefreq>
@@ -298,14 +298,14 @@
   </url>
   
   <url>
-    <loc>https://angiean7.github.io/categories/QT/</loc>
+    <loc>https://angiean7.github.io/categories/Xilinx/</loc>
     <lastmod>2024-04-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://angiean7.github.io/categories/Xilinx/</loc>
+    <loc>https://angiean7.github.io/categories/QT/</loc>
     <lastmod>2024-04-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
