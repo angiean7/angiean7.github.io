@@ -264,6 +264,49 @@ this system-on-chip has:
                 
 
                 <h3 class="home-article-title">
+                    <a href="/2023/12/15/Linux-%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C/">
+                        Linux-基本原子操作 atomic
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        原子操作主要用于实现资源计数，很多引用计数(refcnt)就是通过原子操作实现的。原子类型定义如下：
+12345typedef struct &#123;    volatile int counter; &#125; atomic_t;
+
+vola...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Dec 15 2023 11:21:29 GMT+0900">2023-12-15</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/Linux-C/">Linux C</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/2023/12/15/Linux-%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
                     <a href="/2023/12/15/Linux-%E4%B8%AD%E6%96%AD%E4%B8%8A%E4%B8%8B%E6%96%87/">
                         Linux-中断上下部分(top half、bottom half)
                     </a>
@@ -345,49 +388,6 @@ this system-on-chip has:
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2023/12/15/Linux-%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C/">
-                        Linux-基本原子操作 atomic
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        原子操作主要用于实现资源计数，很多引用计数(refcnt)就是通过原子操作实现的。原子类型定义如下：
-12345typedef struct &#123;    volatile int counter; &#125; atomic_t;
-
-vola...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Dec 15 2023 11:21:29 GMT+0900">2023-12-15</span></span>
-        
-            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/categories/Linux-C/">Linux C</a>&nbsp;
-                        </li>
-                    
-                    
-                </ul>
-            </span>
-        
-        
-    </div>
-
-    <a href="/2023/12/15/Linux-%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
                     <a href="/2023/12/15/Linux%E4%B8%AD%E6%96%AD%E5%AD%90%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0/">
                         Linux中断子系统笔记
                     </a>
@@ -420,46 +420,6 @@ linux kernel中会有一个数据结构保存了关于所有IRQ的中断描述�
     </div>
 
     <a href="/2023/12/15/Linux%E4%B8%AD%E6%96%AD%E5%AD%90%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2023/12/15/Linux%E5%BB%BA%E7%AB%8B%E8%AE%A1%E6%97%B6%E5%99%A8%E7%BA%BF%E7%A8%8B/">
-                        Linux-create a countdown timer thread
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        Linux create a countdown timer threadCreate an independent countdown timer thread, the program ends automatically when the co...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Dec 15 2023 11:21:29 GMT+0900">2023-12-15</span></span>
-        
-            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/categories/Linux-C/">Linux C</a>&nbsp;
-                        </li>
-                    
-                    
-                </ul>
-            </span>
-        
-        
-    </div>
-
-    <a href="/2023/12/15/Linux%E5%BB%BA%E7%AB%8B%E8%AE%A1%E6%97%B6%E5%99%A8%E7%BA%BF%E7%A8%8B/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -514,6 +474,48 @@ E 115200...
                 
 
                 <h3 class="home-article-title">
+                    <a href="/2023/12/15/Linux%E8%BF%90%E8%A1%8Capp%E5%B8%A6%E5%8F%82%E6%95%B0%20getopt/">
+                        Linux运行app带参数 [getopt]
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        Linux运行app带参数 getopt头文件：#include &lt;getopt.h&gt;
+main函数中：
+123456789101112131415161718192021222324252627282930313233343536373...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Dec 15 2023 11:21:29 GMT+0900">2023-12-15</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/Linux-C/">Linux C</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/2023/12/15/Linux%E8%BF%90%E8%A1%8Capp%E5%B8%A6%E5%8F%82%E6%95%B0%20getopt/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
                     <a href="/2023/12/15/QT%E7%AC%94%E8%AE%B0/">
                         QT-个人笔记
                     </a>
@@ -557,16 +559,14 @@ E 115200...
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2023/12/15/Linux%E8%BF%90%E8%A1%8Capp%E5%B8%A6%E5%8F%82%E6%95%B0%20getopt/">
-                        Linux运行app带参数 [getopt]
+                    <a href="/2023/12/15/Linux%E5%BB%BA%E7%AB%8B%E8%AE%A1%E6%97%B6%E5%99%A8%E7%BA%BF%E7%A8%8B/">
+                        Linux-create a countdown timer thread
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
-                        Linux运行app带参数 getopt头文件：#include &lt;getopt.h&gt;
-main函数中：
-123456789101112131415161718192021222324252627282930313233343536373...
+                        Linux create a countdown timer threadCreate an independent countdown timer thread, the program ends automatically when the co...
                     
                 </div>
 
@@ -589,7 +589,7 @@ main函数中：
         
     </div>
 
-    <a href="/2023/12/15/Linux%E8%BF%90%E8%A1%8Capp%E5%B8%A6%E5%8F%82%E6%95%B0%20getopt/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a href="/2023/12/15/Linux%E5%BB%BA%E7%AB%8B%E8%AE%A1%E6%97%B6%E5%99%A8%E7%BA%BF%E7%A8%8B/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
