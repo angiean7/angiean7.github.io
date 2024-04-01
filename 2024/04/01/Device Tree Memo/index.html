@@ -9,7 +9,7 @@
 
     <title>
         
-            C#-wpf笔记 |
+            Device Tree Memo |
         
         Angie An
     </title>
@@ -132,7 +132,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">C#-wpf笔记</span>
+            <span class="title-hover-animation">Device Tree Memo</span>
         </div>
 
         
@@ -149,8 +149,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2023-12-15 11:21:29</span>
-        <span class="mobile">2023-12-15 11:21</span>
+        <span class="pc">2024-04-01 15:39:03</span>
+        <span class="mobile">2024-04-01 15:39</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -158,7 +158,7 @@
             <ul>
                 
                     <li>
-                        <a href="/categories/Windows/">Windows</a>&nbsp;
+                        <a href="/categories/Linux-Kernel/">Linux Kernel</a>&nbsp;
                     </li>
                 
             </ul>
@@ -178,19 +178,14 @@
         
 
         <div class="article-content markdown-body">
-            <h1 id="C-wpf-个人笔记"><a href="#C-wpf-个人笔记" class="headerlink" title="C#      wpf    个人笔记"></a>C#      wpf    个人笔记</h1><ol>
-<li>如何在TacControl种隐藏标签页</li>
-</ol>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">TabPage tp = tabControl1.TabPages[<span class="number">0</span>];<span class="comment">//在这里先保存，以便以后还要显示</span></span><br><span class="line"></span><br><span class="line">tabControl1.TabPages.Remove(tp);<span class="comment">//隐藏（删除）</span></span><br><span class="line"></span><br><span class="line">tabControl1.TabPages.Insert(<span class="number">0</span>, tp);<span class="comment">//显示（插入）</span></span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li><p>将两个IntPtr拼接成一个IntPtr</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> 将两个IntPtr拼接成一个IntPtr</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;lastPtr&quot;&gt;</span>上一次数据指<span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;curPtr&quot;&gt;</span>本次数据指针<span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;imgWidth&quot;&gt;</span>图片宽度<span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;imgHeight&quot;&gt;</span>图片长度<span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;halfSize&quot;&gt;</span>拼接行数<span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;outputBytes&quot;&gt;</span>输出数组<span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">ConcatGrayIntptr</span>(<span class="params">IntPtr lastPtr, IntPtr curPtr, <span class="built_in">int</span> halfSize, <span class="keyword">out</span> IntPtr outPtr</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    outPtr = IntPtr.Zero;</span><br><span class="line">    <span class="built_in">byte</span>[] outputBytes = <span class="keyword">new</span> <span class="built_in">byte</span>[halfSize * <span class="number">2</span>];</span><br><span class="line">    IntPtr offsetLastPtr = IntPtr.Zero;</span><br><span class="line">    <span class="keyword">if</span> (lastPtr != IntPtr.Zero)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (IntPtr.Size == <span class="keyword">sizeof</span>(Int64))</span><br><span class="line">            offsetLastPtr = <span class="keyword">new</span> IntPtr(lastPtr.ToInt64() + halfSize);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            offsetLastPtr = <span class="keyword">new</span> IntPtr(lastPtr.ToInt32() + halfSize);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (offsetLastPtr != IntPtr.Zero)</span><br><span class="line">    &#123;</span><br><span class="line">        Marshal.Copy(offsetLastPtr, outputBytes, <span class="number">0</span>, halfSize);</span><br><span class="line">    &#125;</span><br><span class="line">    Marshal.Copy(curPtr, outputBytes, halfSize, halfSize);</span><br><span class="line">    Marshal.Copy(outputBytes, <span class="number">0</span>, outPtr, halfSize*<span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ol>
-<p>CSVファイルの書き込みと同時にFlashの特定の位置にあるmagic numberも正しく設定され、これでnet_setで設定されたDAC値も使えるようになります。magic numberが正しくない場合はデフォルトDAC値を使いますので、net_setでの設定が効かなくなります。調べた結果としては、一旦正しいmagic numberを設定すれば、net_setでDAC値を設定できるはずなので毎回CSVファイルの書き込みを行う必要はありません。</p>
+            <p>device tree allows the  operating system or bootloader to know things like:</p>
+<p>this system-on-chip has:</p>
+<ul>
+<li>2 Cortex-A9 CPU cores</li>
+<li>2 memory-mapped UART controllers of this variant, one with registers at 0xF1000000 and IRQ 23, and another with registers at 0xF1001000 and IRQ 24</li>
+<li>3 I2C controllers of that variant, with  registers at those memory-mapped address, those IRQs and taking their input clock from this source</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/angiean7/wsl_test/main/image-20240401161154891.png" alt="image-20240401161154891"></p>
 
         </div>
 
@@ -201,29 +196,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2023/12/15/C-bit%20field/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">C言語 struct bit ビットフィールド</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2023/12/15/C++union/"
+                           href="/2023/12/15/Linux-PCI%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">C++ Union structure</span>
+                                <span class="post-nav-title-item">Linux-PCI网络设备驱动</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -440,7 +420,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C-wpf-%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0"><span class="nav-text">C#      wpf    个人笔记</span></a></li></ol>
+        
     </div>
 </div>
         </aside>
