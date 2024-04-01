@@ -187,10 +187,11 @@
 
                 <div class="home-article-content markdown-body">
                     
-                        Device Tree Memodevice tree allows the  operating system or bootloader to know things like:
+                        device tree allows the  operating system or bootloader to know things like:
 this system-on-chip has:
 
-2 Corte...
+2 Cortex-A9 CPU cores
+2...
                     
                 </div>
 
@@ -214,49 +215,6 @@ this system-on-chip has:
     </div>
 
     <a href="/2024/04/01/Device%20Tree%20Memo/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2023/12/15/Linux-%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C/">
-                        Linux-基本原子操作 atomic
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        原子操作主要用于实现资源计数，很多引用计数(refcnt)就是通过原子操作实现的。原子类型定义如下：
-12345typedef struct &#123;    volatile int counter; &#125; atomic_t;
-
-vola...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Dec 15 2023 11:21:29 GMT+0900">2023-12-15</span></span>
-        
-            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/categories/Linux-C/">Linux C</a>&nbsp;
-                        </li>
-                    
-                    
-                </ul>
-            </span>
-        
-        
-    </div>
-
-    <a href="/2023/12/15/Linux-%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -347,15 +305,17 @@ vola...
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2023/12/15/Linux%E4%B8%AD%E6%96%AD%E5%AD%90%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0/">
-                        Linux中断子系统笔记
+                    <a href="/2023/12/15/Linux-%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C/">
+                        Linux-基本原子操作 atomic
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
-                        在linux kernel中，对于每一个外设的IRQ都用struct irq_desc来描述，我们称之中断描述符（struct irq_desc）。
-linux kernel中会有一个数据结构保存了关于所有IRQ的中断描述符信息，我们称之中断描述符D...
+                        原子操作主要用于实现资源计数，很多引用计数(refcnt)就是通过原子操作实现的。原子类型定义如下：
+12345typedef struct &#123;    volatile int counter; &#125; atomic_t;
+
+vola...
                     
                 </div>
 
@@ -368,7 +328,7 @@ linux kernel中会有一个数据结构保存了关于所有IRQ的中断描述�
                     
                         <li>
                             
-                            <a href="/categories/Linux-Kernel/">Linux Kernel</a>&nbsp;
+                            <a href="/categories/Linux-C/">Linux C</a>&nbsp;
                         </li>
                     
                     
@@ -378,7 +338,7 @@ linux kernel中会有一个数据结构保存了关于所有IRQ的中断描述�
         
     </div>
 
-    <a href="/2023/12/15/Linux%E4%B8%AD%E6%96%AD%E5%AD%90%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a href="/2023/12/15/Linux-%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -428,16 +388,15 @@ linux kernel中会有一个数据结构保存了关于所有IRQ的中断描述�
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2023/12/15/Linux%E8%BF%90%E8%A1%8Capp%E5%B8%A6%E5%8F%82%E6%95%B0%20getopt/">
-                        Linux运行app带参数 [getopt]
+                    <a href="/2023/12/15/Linux%E4%B8%AD%E6%96%AD%E5%AD%90%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0/">
+                        Linux中断子系统笔记
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
-                        Linux运行app带参数 getopt头文件：#include &lt;getopt.h&gt;
-main函数中：
-123456789101112131415161718192021222324252627282930313233343536373...
+                        在linux kernel中，对于每一个外设的IRQ都用struct irq_desc来描述，我们称之中断描述符（struct irq_desc）。
+linux kernel中会有一个数据结构保存了关于所有IRQ的中断描述符信息，我们称之中断描述符D...
                     
                 </div>
 
@@ -450,7 +409,7 @@ main函数中：
                     
                         <li>
                             
-                            <a href="/categories/Linux-C/">Linux C</a>&nbsp;
+                            <a href="/categories/Linux-Kernel/">Linux Kernel</a>&nbsp;
                         </li>
                     
                     
@@ -460,7 +419,7 @@ main函数中：
         
     </div>
 
-    <a href="/2023/12/15/Linux%E8%BF%90%E8%A1%8Capp%E5%B8%A6%E5%8F%82%E6%95%B0%20getopt/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a href="/2023/12/15/Linux%E4%B8%AD%E6%96%AD%E5%AD%90%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -515,47 +474,6 @@ E 115200...
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2023/12/15/WindowsOpenBoard%E6%B5%81%E7%A8%8B/">
-                        Windows OpenBoard流程
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        Windows OpenBoard流程which means 打开driver获得句柄的流程。
-1234HDEVINFO             hDevInfo;SP_INTERFACE_DEVICE_DATA     IfDevData;SP_I...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Dec 15 2023 11:21:29 GMT+0900">2023-12-15</span></span>
-        
-            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/categories/Windows/">Windows</a>&nbsp;
-                        </li>
-                    
-                    
-                </ul>
-            </span>
-        
-        
-    </div>
-
-    <a href="/2023/12/15/WindowsOpenBoard%E6%B5%81%E7%A8%8B/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
                     <a href="/2023/12/15/Linux%E5%BB%BA%E7%AB%8B%E8%AE%A1%E6%97%B6%E5%99%A8%E7%BA%BF%E7%A8%8B/">
                         Linux-create a countdown timer thread
                     </a>
@@ -587,6 +505,91 @@ E 115200...
     </div>
 
     <a href="/2023/12/15/Linux%E5%BB%BA%E7%AB%8B%E8%AE%A1%E6%97%B6%E5%99%A8%E7%BA%BF%E7%A8%8B/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023/12/15/Linux%E8%BF%90%E8%A1%8Capp%E5%B8%A6%E5%8F%82%E6%95%B0%20getopt/">
+                        Linux运行app带参数 [getopt]
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        Linux运行app带参数 getopt头文件：#include &lt;getopt.h&gt;
+main函数中：
+123456789101112131415161718192021222324252627282930313233343536373...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Dec 15 2023 11:21:29 GMT+0900">2023-12-15</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/Linux-C/">Linux C</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/2023/12/15/Linux%E8%BF%90%E8%A1%8Capp%E5%B8%A6%E5%8F%82%E6%95%B0%20getopt/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023/12/15/QT%E7%AC%94%E8%AE%B0/">
+                        QT-个人笔记
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        QT-个人笔记
+使combobox選項失效ui-&gt;comboBox_ddr_select-&gt;setItemData(offset, 0, Qt::UserRole - 1);
+
+
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Dec 15 2023 11:21:29 GMT+0900">2023-12-15</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/QT/">QT</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/2023/12/15/QT%E7%AC%94%E8%AE%B0/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
