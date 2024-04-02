@@ -178,14 +178,17 @@
         
 
         <div class="article-content markdown-body">
-            <p>device tree allows the  operating system or bootloader to know things like:</p>
+            <p>Device tree allows the  operating system or bootloader to know things like:</p>
 <p>this system-on-chip has:</p>
 <ul>
 <li>2 Cortex-A9 CPU cores</li>
 <li>2 memory-mapped UART controllers of this variant, one with registers at 0xF1000000 and IRQ 23, and another with registers at 0xF1001000 and IRQ 24</li>
 <li>3 I2C controllers of that variant, with  registers at those memory-mapped address, those IRQs and taking their input clock from this source</li>
 </ul>
+<p>simplified example of i2c controller and it’s sub node (eeprom0): </p>
 <p><img src="https://raw.githubusercontent.com/angiean7/wsl_test/main/image-20240401161154891.png" alt="image-20240401161154891"></p>
+<p>there is no need to describe usb devices in the device tree as sub node, the usb controller will discover them at runtime. </p>
+<p><img src="https://raw.githubusercontent.com/angiean7/pictures/main/image-20240402182135124.png" alt="image-20240402182135124"></p>
 
         </div>
 

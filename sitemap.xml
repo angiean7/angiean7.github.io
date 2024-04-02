@@ -4,7 +4,7 @@
   <url>
     <loc>https://angiean7.github.io/2024/04/01/Device%20Tree%20Memo/</loc>
     
-    <lastmod>2024-04-01</lastmod>
+    <lastmod>2024-04-02</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -229,7 +229,7 @@
 
   <url>
     <loc>https://angiean7.github.io/</loc>
-    <lastmod>2024-04-01</lastmod>
+    <lastmod>2024-04-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -239,63 +239,63 @@
   
   <url>
     <loc>https://angiean7.github.io/categories/Linux-C/</loc>
-    <lastmod>2024-04-01</lastmod>
+    <lastmod>2024-04-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://angiean7.github.io/categories/Windows/</loc>
-    <lastmod>2024-04-01</lastmod>
+    <lastmod>2024-04-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://angiean7.github.io/categories/Linux-Kernel/</loc>
-    <lastmod>2024-04-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://angiean7.github.io/categories/Linux-drv/</loc>
-    <lastmod>2024-04-01</lastmod>
+    <lastmod>2024-04-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://angiean7.github.io/categories/I2C/</loc>
-    <lastmod>2024-04-01</lastmod>
+    <lastmod>2024-04-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://angiean7.github.io/categories/Linux-drv/</loc>
+    <lastmod>2024-04-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://angiean7.github.io/categories/%E7%8E%AF%E5%A2%83/</loc>
-    <lastmod>2024-04-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://angiean7.github.io/categories/Xilinx/</loc>
-    <lastmod>2024-04-01</lastmod>
+    <lastmod>2024-04-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://angiean7.github.io/categories/QT/</loc>
-    <lastmod>2024-04-01</lastmod>
+    <lastmod>2024-04-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://angiean7.github.io/categories/Xilinx/</loc>
+    <lastmod>2024-04-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://angiean7.github.io/categories/%E6%97%A5%E8%AF%AD/</loc>
-    <lastmod>2024-04-01</lastmod>
+    <lastmod>2024-04-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
