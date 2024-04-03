@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="keywords" content="Angie">
     <meta name="description" content="Angie">
     <meta name="author" content="Angie An">
 
@@ -134,14 +134,15 @@
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2023/12/15/C-bit%20field/">
-                        C言語 struct bit ビットフィールド
+                    <a href="/2023/12/15/I2C%E5%86%99%E5%85%A5EEPROM/">
+                        使用I2C &amp; 写入EEPROM
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
-                        12345678910111213141516/* ビットフィールドを宣言 */struct bit&#123;      unsigned int b1 : 1;      unsigned int b2 : 2;      unsigned in...
+                        使用I2C &amp; 写入EEPROMstm32f10x控制HDMI RX子卡，电脑通过HDMI 连接板卡，需要通过HDMI的DDCSDA和DDCCLK读取板卡上的EEPROM获取EDID。
+1.MCU控制芯片初始化IIC123456void IT...
                     
                 </div>
 
@@ -154,7 +155,7 @@
                     
                         <li>
                             
-                            <a href="/categories/Linux-C/">Linux C</a>&nbsp;
+                            <a href="/categories/I2C/">I2C</a>&nbsp;
                         </li>
                     
                     
@@ -164,7 +165,7 @@
         
     </div>
 
-    <a href="/2023/12/15/C-bit%20field/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a href="/2023/12/15/I2C%E5%86%99%E5%85%A5EEPROM/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -219,48 +220,6 @@ Makefile
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2023/12/15/C-volatile%E7%94%A8%E6%B3%95/">
-                        C volatile的用法及意义
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        volatile影响编译器编译的结果,volatile指出 变量是随时可能发生变化的，与volatile变量有关的运算，不要进行编译优化，以免出错。
-例如：
-1234volatile int i=10; int j = i; ... int k = ...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Dec 15 2023 11:21:29 GMT+0900">2023-12-15</span></span>
-        
-            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/categories/Linux-C/">Linux C</a>&nbsp;
-                        </li>
-                    
-                    
-                </ul>
-            </span>
-        
-        
-    </div>
-
-    <a href="/2023/12/15/C-volatile%E7%94%A8%E6%B3%95/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
                     <a href="/2023/12/15/Linux-PCI%20Driver/">
                         Linux-PCI Driver
                     </a>
@@ -301,6 +260,48 @@ Linux PCI设备驱动
     </div>
 
     <a href="/2023/12/15/Linux-PCI%20Driver/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023/12/15/C-volatile%E7%94%A8%E6%B3%95/">
+                        C volatile的用法及意义
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        volatile影响编译器编译的结果,volatile指出 变量是随时可能发生变化的，与volatile变量有关的运算，不要进行编译优化，以免出错。
+例如：
+1234volatile int i=10; int j = i; ... int k = ...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Dec 15 2023 11:21:29 GMT+0900">2023-12-15</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/Linux-C/">Linux C</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/2023/12/15/C-volatile%E7%94%A8%E6%B3%95/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
