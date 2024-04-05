@@ -1,5 +1,5 @@
-https://angiean7.github.io/2024/04/03/Typora+picgo+githubrepo/
 https://angiean7.github.io/2024/04/01/Device%20Tree%20Memo/
+https://angiean7.github.io/2024/04/03/Typora+picgo+githubrepo/
 https://angiean7.github.io/2023/12/15/C%20%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/
 https://angiean7.github.io/2023/12/15/C-volatile%E7%94%A8%E6%B3%95/
 https://angiean7.github.io/2023/12/15/Xilinx%20%E4%B8%AD%E6%96%AD%E5%87%BD%E6%95%B0%E9%85%8D%E7%BD%AE/
@@ -25,11 +25,11 @@ https://angiean7.github.io/categories/index.html
 https://angiean7.github.io/tags/index.html
 https://angiean7.github.io/2023/12/15/I2C%E5%86%99%E5%85%A5EEPROM/
 https://angiean7.github.io/
-https://angiean7.github.io/categories/Windows/
 https://angiean7.github.io/categories/Linux-C/
-https://angiean7.github.io/categories/I2C/
-https://angiean7.github.io/categories/Linux-drv/
+https://angiean7.github.io/categories/Windows/
 https://angiean7.github.io/categories/Linux-Kernel/
+https://angiean7.github.io/categories/Linux-drv/
+https://angiean7.github.io/categories/I2C/
 https://angiean7.github.io/categories/%E7%8E%AF%E5%A2%83/
 https://angiean7.github.io/categories/QT/
 https://angiean7.github.io/categories/Xilinx/
