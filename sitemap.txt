@@ -1,3 +1,4 @@
+https://angiean7.github.io/2024/04/17/Kria%20KV260%20setup/
 https://angiean7.github.io/2024/04/01/Device%20Tree%20Memo/
 https://angiean7.github.io/2024/04/03/Typora+picgo+githubrepo/
 https://angiean7.github.io/2023/12/15/C%20%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/
@@ -34,3 +35,4 @@ https://angiean7.github.io/categories/%E7%8E%AF%E5%A2%83/
 https://angiean7.github.io/categories/QT/
 https://angiean7.github.io/categories/Xilinx/
 https://angiean7.github.io/categories/%E6%97%A5%E8%AF%AD/
+https://angiean7.github.io/categories/Linux/
