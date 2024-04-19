@@ -306,49 +306,6 @@ this system-on-chip has:
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2023/12/15/Linux-%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C/">
-                        Linux-基本原子操作 atomic
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        原子操作主要用于实现资源计数，很多引用计数(refcnt)就是通过原子操作实现的。原子类型定义如下：
-12345typedef struct &#123;    volatile int counter; &#125; atomic_t;
-
-vola...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Dec 15 2023 11:21:29 GMT+0900">2023-12-15</span></span>
-        
-            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/categories/Linux-C/">Linux C</a>&nbsp;
-                        </li>
-                    
-                    
-                </ul>
-            </span>
-        
-        
-    </div>
-
-    <a href="/2023/12/15/Linux-%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
                     <a href="/2023/12/15/Linux-PCI%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8/">
                         Linux-PCI网络设备驱动
                     </a>
@@ -389,19 +346,15 @@ vola...
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2023/12/15/Linux%E4%BD%BF%E7%94%A8%E4%B8%B2%E5%8F%A3%E5%B7%A5%E5%85%B7/">
-                        Linux使用串口工具minicom
+                    <a href="/2023/12/15/Linux-%E4%B8%AD%E6%96%AD%E4%B8%8A%E4%B8%8B%E6%96%87/">
+                        Linux-中断上下部分(top half、bottom half)
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
-                        Linux使用串口工具sudo apt-get install minicom
-安装好之后minicom运行软件
-按下ctrl+a然后再按z打开帮助
-按O进入配置页面
-A serial port setup中设置/dev/ttyS0
-E 115200...
+                        问题：linux系统中对中断的处理为什么会有上下部之分呢？
+中断处理程序处于中断上下文，而中断上下文是不参与调度的，这样中断上下文不能出现可能休眠的操作，因为中断上下文一旦休眠就会交出cpu，而中断上下文不参与调度，也就是交出cpu时不会保存上下文，...
                     
                 </div>
 
@@ -414,7 +367,7 @@ E 115200...
                     
                         <li>
                             
-                            <a href="/categories/%E7%8E%AF%E5%A2%83/">环境</a>&nbsp;
+                            <a href="/categories/Linux-C/">Linux C</a>&nbsp;
                         </li>
                     
                     
@@ -424,7 +377,7 @@ E 115200...
         
     </div>
 
-    <a href="/2023/12/15/Linux%E4%BD%BF%E7%94%A8%E4%B8%B2%E5%8F%A3%E5%B7%A5%E5%85%B7/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a href="/2023/12/15/Linux-%E4%B8%AD%E6%96%AD%E4%B8%8A%E4%B8%8B%E6%96%87/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -434,15 +387,17 @@ E 115200...
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2023/12/15/Linux%E4%B8%AD%E6%96%AD%E5%AD%90%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0/">
-                        Linux中断子系统笔记
+                    <a href="/2023/12/15/Linux-%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C/">
+                        Linux-基本原子操作 atomic
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
-                        在linux kernel中，对于每一个外设的IRQ都用struct irq_desc来描述，我们称之中断描述符（struct irq_desc）。
-linux kernel中会有一个数据结构保存了关于所有IRQ的中断描述符信息，我们称之中断描述符D...
+                        原子操作主要用于实现资源计数，很多引用计数(refcnt)就是通过原子操作实现的。原子类型定义如下：
+12345typedef struct &#123;    volatile int counter; &#125; atomic_t;
+
+vola...
                     
                 </div>
 
@@ -455,7 +410,7 @@ linux kernel中会有一个数据结构保存了关于所有IRQ的中断描述�
                     
                         <li>
                             
-                            <a href="/categories/Linux-Kernel/">Linux Kernel</a>&nbsp;
+                            <a href="/categories/Linux-C/">Linux C</a>&nbsp;
                         </li>
                     
                     
@@ -465,7 +420,7 @@ linux kernel中会有一个数据结构保存了关于所有IRQ的中断描述�
         
     </div>
 
-    <a href="/2023/12/15/Linux%E4%B8%AD%E6%96%AD%E5%AD%90%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a href="/2023/12/15/Linux-%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -555,15 +510,15 @@ linux kernel中会有一个数据结构保存了关于所有IRQ的中断描述�
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2023/12/15/Linux-%E4%B8%AD%E6%96%AD%E4%B8%8A%E4%B8%8B%E6%96%87/">
-                        Linux-中断上下部分(top half、bottom half)
+                    <a href="/2023/12/15/Linux%E4%B8%AD%E6%96%AD%E5%AD%90%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0/">
+                        Linux中断子系统笔记
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
-                        问题：linux系统中对中断的处理为什么会有上下部之分呢？
-中断处理程序处于中断上下文，而中断上下文是不参与调度的，这样中断上下文不能出现可能休眠的操作，因为中断上下文一旦休眠就会交出cpu，而中断上下文不参与调度，也就是交出cpu时不会保存上下文，...
+                        在linux kernel中，对于每一个外设的IRQ都用struct irq_desc来描述，我们称之中断描述符（struct irq_desc）。
+linux kernel中会有一个数据结构保存了关于所有IRQ的中断描述符信息，我们称之中断描述符D...
                     
                 </div>
 
@@ -576,7 +531,7 @@ linux kernel中会有一个数据结构保存了关于所有IRQ的中断描述�
                     
                         <li>
                             
-                            <a href="/categories/Linux-C/">Linux C</a>&nbsp;
+                            <a href="/categories/Linux-Kernel/">Linux Kernel</a>&nbsp;
                         </li>
                     
                     
@@ -586,7 +541,52 @@ linux kernel中会有一个数据结构保存了关于所有IRQ的中断描述�
         
     </div>
 
-    <a href="/2023/12/15/Linux-%E4%B8%AD%E6%96%AD%E4%B8%8A%E4%B8%8B%E6%96%87/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a href="/2023/12/15/Linux%E4%B8%AD%E6%96%AD%E5%AD%90%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023/12/15/Linux%E4%BD%BF%E7%94%A8%E4%B8%B2%E5%8F%A3%E5%B7%A5%E5%85%B7/">
+                        Linux使用串口工具minicom
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        Linux使用串口工具sudo apt-get install minicom
+安装好之后minicom运行软件
+按下ctrl+a然后再按z打开帮助
+按O进入配置页面
+A serial port setup中设置/dev/ttyS0
+E 115200...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Dec 15 2023 11:21:29 GMT+0900">2023-12-15</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E7%8E%AF%E5%A2%83/">环境</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/2023/12/15/Linux%E4%BD%BF%E7%94%A8%E4%B8%B2%E5%8F%A3%E5%B7%A5%E5%85%B7/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
