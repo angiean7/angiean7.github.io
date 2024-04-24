@@ -9,7 +9,7 @@
 
     <title>
         
-            Run Vitis AI Examples by KV260 |
+            Run Vitis AI Examples on KV260 |
         
         Angie An
     </title>
@@ -132,7 +132,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">Run Vitis AI Examples by KV260</span>
+            <span class="title-hover-animation">Run Vitis AI Examples on KV260</span>
         </div>
 
         
@@ -263,12 +263,8 @@
 </tbody></table>
 </li>
 </ol>
-<h1 id="Use-petalinux-to-build-a-board-image"><a href="#Use-petalinux-to-build-a-board-image" class="headerlink" title="Use petalinux to build a board image"></a>Use petalinux to build a board image</h1><h2 id="Install-Petalinux-SDK-to-WSL2-Ubuntu-22-04-4-LTS”"><a href="#Install-Petalinux-SDK-to-WSL2-Ubuntu-22-04-4-LTS”" class="headerlink" title="Install Petalinux SDK to WSL2(Ubuntu 22.04.4 LTS”)"></a>Install Petalinux SDK to WSL2(Ubuntu 22.04.4 LTS”)</h2><p>Get <code>PetaLinux Tools - Installer - 2023.2 Full Product Installation</code> from the following links:</p>
+<h1 id="Use-petalinux-to-build-a-board-image"><a href="#Use-petalinux-to-build-a-board-image" class="headerlink" title="Use petalinux to build a board image"></a>Use petalinux to build a board image</h1><h2 id="Install-Petalinux-SDK-to-WSL2-Ubuntu-22-04-4-LTS”"><a href="#Install-Petalinux-SDK-to-WSL2-Ubuntu-22-04-4-LTS”" class="headerlink" title="Install Petalinux SDK to WSL2(Ubuntu 22.04.4 LTS”)"></a>Install Petalinux SDK to WSL2(Ubuntu 22.04.4 LTS”)</h2><p>Get <code>PetaLinux Tools - Installer - 2023.2 Full Product Installation</code> from the following links, and install it:</p>
 <p><a class="link"   target="_blank" rel="noopener" href="https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-design-tools.html" >Xilinx Petalinux Downloads<i class="fas fa-external-link-alt"></i></a></p>
-<p>I use WSL2 with “Ubuntu 22.04.4 LTS”, and i had to use apt-get to install the following tools. </p>
-<p><img src="https://raw.githubusercontent.com/angiean7/pictures/main/image-20240417140721081.png" alt="image-20240417140721081"></p>
-<p>Then it seems like i have installed Petalinux SDK successfully, so far so good. </p>
-<p><img src="https://raw.githubusercontent.com/angiean7/pictures/main/image-20240417142205071.png" alt="image-20240417142205071"></p>
 <p>Download Kria K26 SOM Board Support Package from the following link: </p>
 <p><a class="link"   target="_blank" rel="noopener" href="https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-design-tools.html" >Downloads<i class="fas fa-external-link-alt"></i></a></p>
 <p><img src="https://raw.githubusercontent.com/angiean7/pictures/main/image-20240417170035187.png" alt="image-20240417170035187"></p>
@@ -279,7 +275,7 @@
 <h3 id="Building-the-Linux-Image-With-Petalinux-Using-recipes-vitis-ai"><a href="#Building-the-Linux-Image-With-Petalinux-Using-recipes-vitis-ai" class="headerlink" title="Building the Linux Image With Petalinux Using recipes-vitis-ai"></a>Building the Linux Image With Petalinux Using recipes-vitis-ai</h3><p>REF: <a class="link"   target="_blank" rel="noopener" href="https://xilinx.github.io/Vitis-AI/3.5/html/docs/workflow-system-integration#rebuilding-the-linux-image-with-petalinux" >Integrating the DPU - Rebuilding the Linux Image With Petalinu<i class="fas fa-external-link-alt"></i></a></p>
 <ol>
 <li><p>Copy the <code>recipes-vitis-ai</code> folder to <code>&lt;petalinux project&gt;/project-spec/meta-user/</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -r /home/anqi/work/Vitis-AI/Vitis-AI/src/vai_petalinux_recipes/recipes-vitis-ai</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -r /home/anq/workspace/Vitis-AI/src/vai_petalinux_recipes/recipes-vitis-ai /home/anq/workspace/kv260/kv260/project-spec/meta-user/</span><br></pre></td></tr></table></figure>
 
 <p> <img src="https://raw.githubusercontent.com/angiean7/pictures/main/image-20240418172641480.png" alt="image-20240418172641480"></p>
 </li>
@@ -299,48 +295,28 @@
 <p><img src="https://raw.githubusercontent.com/angiean7/pictures/main/image-20240418173132238.png" alt="image-20240418173132238"></p>
 </li>
 <li><p>Run <code>petalinux-build</code>.</p>
+<p>When i was building project, there were 2 issues. </p>
+<p>a. <strong>0001-glog-enable-fatal-throw-exception.patch is already applied.</strong>  </p>
+<p><img src="https://raw.githubusercontent.com/angiean7/pictures/main/image-20240424130711333.png" alt="image-20240424130711333"></p>
+<p>As i checked how many times the patch is used, i found 2 results. </p>
+<p><img src="https://raw.githubusercontent.com/angiean7/pictures/main/image-20240424131500405.png" alt="image-20240424131500405"></p>
+<p>Therefore, i commented out one of them in glog_0.5.0.bbappend. </p>
+<p><img src="https://raw.githubusercontent.com/angiean7/pictures/main/image-20240424131528466.png" alt="image-20240424131528466"></p>
+<p>Then rebuild project, this issue seems to be resolved. </p>
+<p>b. <strong>cpio: cannot seek on output: Invalid argument</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">| cpio: cannot seek on output: Invalid argument</span><br><span class="line">| WARNING: exit code 2 from a shell command.</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/angiean7/pictures/main/image-20240424132120109.png" alt="image-20240424132120109"></p>
+<p>I found the solution in the Petalinux manual:</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://docs.amd.com/r/ja-JP/ug1144-petalinux-tools-reference-guide/do_image_cpio-Function-Failed-%E3%81%A8%E3%81%84%E3%81%86%E3%82%A8%E3%83%A9%E3%83%BC-%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%81%8C%E8%A1%A8%E7%A4%BA%E3%81%95%E3%82%8C%E3%82%8B" >「do_image_cpio: Function Failed」というエラー メッセージが表示される<i class="fas fa-external-link-alt"></i></a></p>
+<p><img src="https://raw.githubusercontent.com/angiean7/pictures/main/image-20240424132326769.png" alt="image-20240424132326769"></p>
 </li>
 </ol>
-<h1 id=""><a href="#" class="headerlink" title="===================================="></a>====================================</h1><h3 id="Importing-Hardware-Configuration"><a href="#Importing-Hardware-Configuration" class="headerlink" title="Importing Hardware Configuration"></a>Importing Hardware Configuration</h3><p>Import the hardware description with <code>petalinux-config</code> command using the following command:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">petalinux-config --get-hw-description hardware/xilinx-kv260-starterkit-2023.2/</span><br></pre></td></tr></table></figure>
-
-<p>Ensure <strong>DTG Settings</strong> &gt; <strong>(template) MACHINE_NAME</strong> is selected and use the option as follows:</p>
-<p><img src="https://raw.githubusercontent.com/angiean7/pictures/main/image-20240418112628817.png" alt="image-20240418112628817"></p>
-<p><img src="https://raw.githubusercontent.com/angiean7/pictures/main/image-20240418112806926.png" alt="image-20240418112806926"></p>
-<p>The <code>--silentconfig</code> option allows you to reuse a prior configuration. You can change the configurations without opening system level configuration menu. </p>
-<h3 id="Configuring-kernel"><a href="#Configuring-kernel" class="headerlink" title="Configuring kernel"></a>Configuring kernel</h3><p>Use this command to configure kernel</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">petalinux-config -c kernel</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/angiean7/pictures/main/image-20240418133134469.png" alt="image-20240418133134469"></p>
-<h3 id="Configuring-rootfs"><a href="#Configuring-rootfs" class="headerlink" title="Configuring rootfs"></a>Configuring rootfs</h3><p>Enable openamp and its examples in rootfs</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">petalinux-config -c rootfs</span><br></pre></td></tr></table></figure>
-
-<p>Select following packages and save it:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">openamp-fw-echo-testd</span><br><span class="line">openamp-fw-mat-muld</span><br><span class="line">openamp-fw-rpc-demo</span><br><span class="line">packagegroup-petalinux-openamp</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/angiean7/pictures/main/image-20240418114230505.png" alt="image-20240418114230505"></p>
-<p><img src="https://raw.githubusercontent.com/angiean7/pictures/main/image-20240418114311286.png" alt="image-20240418114311286"></p>
-<h3 id="Configuring-BSP"><a href="#Configuring-BSP" class="headerlink" title="Configuring BSP"></a>Configuring BSP</h3><p>Use <code>patalinux-config</code> to configure BSP:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">petalinux-config</span><br></pre></td></tr></table></figure>
-
-<p>Make sure the following steps have been done.</p>
-<p>ref: <project>/README</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">Enter zynqmp-smk-k26-reva for MACHINE_NAME option ( DTG parameter for revA )</span><br><span class="line"></span><br><span class="line">Enter xilinx-k26-kv for YOCTO_MACHINE_NAME option for kv260-starter board</span><br><span class="line"></span><br><span class="line">Enter xilinx-k26-kr for YOCTO_MACHINE_NAME option for kr260-starter board</span><br><span class="line"></span><br><span class="line">Enable CONFIG_SUBSYSTEM_COMPONENT_IMG_SEL</span><br><span class="line"></span><br><span class="line">Set the CONFIG_SUBSYSTEM_INITRAMFS_IMAGE_NAME as &quot;petalinux-initramfs-image&quot;</span><br><span class="line"></span><br><span class="line">Set the CONFIG_SUBSYSTEM_EXTRA_BOOTARGS as &quot;cma=900M&quot;</span><br><span class="line"></span><br><span class="line"># Enabling misc-config recipe for ramdisk rfs</span><br><span class="line"></span><br><span class="line">echo &quot;INITRAMFS_PACKAGES:append = \&quot; misc-config\&quot;&quot; &gt;&gt; &lt;project&gt;/project-spec/meta-user/conf/petalinuxbsp.conf</span><br><span class="line"></span><br><span class="line">echo &quot;UBOOT_IMAGE_BLOB:k26 = \&quot;0\&quot;&quot; &gt;&gt; &lt;project&gt;/project-spec/meta-user/conf/petalinuxbsp.conf</span><br><span class="line"></span><br><span class="line">cp -r &lt;kv260/kr260 bsp&gt;/project-spec/dts_dir/* &lt;project root&gt;/project-spec/dts_dir/.</span><br><span class="line"></span><br><span class="line">Add CONFIG_SUBSYSTEM_EXTRA_DT_FILES with pointing carrier dts file copied above</span><br><span class="line"></span><br><span class="line">DTG Settings --&gt; Extra dts/dtsi files</span><br><span class="line"></span><br><span class="line">Enter dts files path &lt;project root&gt;/project-spec/dts_dir/zynqmp-sck-kr-g-revB.dts (for kr260 starterkit)</span><br><span class="line"></span><br><span class="line">Enter dts files path &lt;project root&gt;/project-spec/dts_dir/zynqmp-sck-kv-g-revB.dts (for kv260 starterkit)</span><br><span class="line"></span><br><span class="line">cat &gt; &lt;project root&gt;/project-spec/meta-user/conf/petalinuxbsp.conf &lt;&lt; EOL</span><br><span class="line"></span><br><span class="line">EXTRA_DTFILE_PREFIX = &quot;system&quot;</span><br><span class="line"></span><br><span class="line">EXTRA_DTFILES_BUNDLE = &quot;1&quot;</span><br><span class="line"></span><br><span class="line">EOL</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/angiean7/pictures/main/image-20240418115845124.png" alt="image-20240418115845124"></p>
-<p><img src="https://raw.githubusercontent.com/angiean7/pictures/main/image-20240418120027019.png" alt="image-20240418120027019"></p>
-<h3 id="Configuring-u-boot"><a href="#Configuring-u-boot" class="headerlink" title="Configuring u-boot"></a>Configuring u-boot</h3><p> <code>petalinux-config -c u-boot</code></p>
-<p>Select following configs and save it: </p>
-<p>CONFIG_OF_BOARD</p>
-<h3 id="Building-a-System-Image"><a href="#Building-a-System-Image" class="headerlink" title="Building a System Image"></a>Building a System Image</h3><p>Run <code>petalinux-build</code> to build the system image:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">petalinux-build</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/angiean7/pictures/main/image-20240418143320726.png" alt="image-20240418143320726"></p>
-<h1 id="-1"><a href="#-1" class="headerlink" title="===================================="></a>====================================</h1><h3 id="Generate-Boot-Image"><a href="#Generate-Boot-Image" class="headerlink" title="Generate Boot Image"></a>Generate Boot Image</h3><p>The boot image can be put into Flash or SD card. When you power on the board, it can boot from the boot image. A boot image usually contains a <strong>first stage boot loader image, FPGA bitstream, PMU firmware, TF-A, and U-Boot.</strong></p>
+<h3 id="Generate-Boot-Image"><a href="#Generate-Boot-Image" class="headerlink" title="Generate Boot Image"></a>Generate Boot Image</h3><p>The boot image can be put into Flash or SD card. When you power on the board, it can boot from the boot image. A boot image usually contains a <strong>first stage boot loader image, FPGA bitstream, PMU firmware, TF-A, and U-Boot.</strong></p>
 <p>Execute the following command to generate the boot image in <code>.BIN</code> format.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">petalinux-package --boot --u-boot</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://raw.githubusercontent.com/angiean7/pictures/main/image-20240418142249178.png" alt="image-20240418142249178"></p>
+<p><img src="https://raw.githubusercontent.com/angiean7/pictures/main/image-20240424133208907.png" alt="image-20240424133208907"></p>
 <h3 id="Booting-PetaLinux-Image-on-Hardware-with-an-SD-Card"><a href="#Booting-PetaLinux-Image-on-Hardware-with-an-SD-Card" class="headerlink" title="Booting PetaLinux Image on Hardware with an SD Card"></a>Booting PetaLinux Image on Hardware with an SD Card</h3><p>You can boot a PetaLinux image on hardware using an SD card by copying the required images manually.</p>
 <p>Copy the following files from <code>&lt;plnx-proj-root&gt;/images/linux or &lt;plnx-proj-root&gt;/pre-built/linux/images/</code> into the boot directory of the first partition, which is in FAT32 format in the SD card:</p>
 <ul>
@@ -590,7 +566,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Use-board-image-provided-by-Xilinx"><span class="nav-text">Use board image provided by Xilinx</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Use-petalinux-to-build-a-board-image"><span class="nav-text">Use petalinux to build a board image</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-Petalinux-SDK-to-WSL2-Ubuntu-22-04-4-LTS%E2%80%9D"><span class="nav-text">Install Petalinux SDK to WSL2(Ubuntu 22.04.4 LTS”)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Build-Board-Image"><span class="nav-text">Build Board Image</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Creating-a-Project-Using-PetaLinux-BSP"><span class="nav-text">Creating a Project Using PetaLinux BSP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Building-the-Linux-Image-With-Petalinux-Using-recipes-vitis-ai"><span class="nav-text">Building the Linux Image With Petalinux Using recipes-vitis-ai</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Importing-Hardware-Configuration"><span class="nav-text">Importing Hardware Configuration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Configuring-kernel"><span class="nav-text">Configuring kernel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Configuring-rootfs"><span class="nav-text">Configuring rootfs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Configuring-BSP"><span class="nav-text">Configuring BSP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Configuring-u-boot"><span class="nav-text">Configuring u-boot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Building-a-System-Image"><span class="nav-text">Building a System Image</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#-1"><span class="nav-text">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-Boot-Image"><span class="nav-text">Generate Boot Image</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Booting-PetaLinux-Image-on-Hardware-with-an-SD-Card"><span class="nav-text">Booting PetaLinux Image on Hardware with an SD Card</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-Vitis-to-WSL2"><span class="nav-text">Install Vitis to WSL2</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Use-board-image-provided-by-Xilinx"><span class="nav-text">Use board image provided by Xilinx</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Use-petalinux-to-build-a-board-image"><span class="nav-text">Use petalinux to build a board image</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-Petalinux-SDK-to-WSL2-Ubuntu-22-04-4-LTS%E2%80%9D"><span class="nav-text">Install Petalinux SDK to WSL2(Ubuntu 22.04.4 LTS”)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Build-Board-Image"><span class="nav-text">Build Board Image</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Creating-a-Project-Using-PetaLinux-BSP"><span class="nav-text">Creating a Project Using PetaLinux BSP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Building-the-Linux-Image-With-Petalinux-Using-recipes-vitis-ai"><span class="nav-text">Building the Linux Image With Petalinux Using recipes-vitis-ai</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-Boot-Image"><span class="nav-text">Generate Boot Image</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Booting-PetaLinux-Image-on-Hardware-with-an-SD-Card"><span class="nav-text">Booting PetaLinux Image on Hardware with an SD Card</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-Vitis-to-WSL2"><span class="nav-text">Install Vitis to WSL2</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>
