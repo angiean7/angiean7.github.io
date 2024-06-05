@@ -2,9 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://angiean7.github.io/2024/06/05/push_to_main_shell/</loc>
+    
+    <lastmod>2024-06-05</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://angiean7.github.io/2024/04/17/Kria%20KV260%20setup/</loc>
     
-    <lastmod>2024-05-30</lastmod>
+    <lastmod>2024-06-01</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -247,7 +256,7 @@
 
   <url>
     <loc>https://angiean7.github.io/</loc>
-    <lastmod>2024-05-30</lastmod>
+    <lastmod>2024-06-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -256,71 +265,71 @@
 
   
   <url>
-    <loc>https://angiean7.github.io/categories/Linux-C/</loc>
-    <lastmod>2024-05-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://angiean7.github.io/categories/Windows/</loc>
-    <lastmod>2024-05-30</lastmod>
+    <lastmod>2024-06-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://angiean7.github.io/categories/Linux/</loc>
-    <lastmod>2024-05-30</lastmod>
+    <loc>https://angiean7.github.io/categories/Linux-C/</loc>
+    <lastmod>2024-06-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://angiean7.github.io/categories/Linux-Kernel/</loc>
-    <lastmod>2024-05-30</lastmod>
+    <lastmod>2024-06-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://angiean7.github.io/categories/Linux-drv/</loc>
-    <lastmod>2024-05-30</lastmod>
+    <lastmod>2024-06-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://angiean7.github.io/categories/I2C/</loc>
-    <lastmod>2024-05-30</lastmod>
+    <lastmod>2024-06-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://angiean7.github.io/categories/Linux/</loc>
+    <lastmod>2024-06-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://angiean7.github.io/categories/%E7%8E%AF%E5%A2%83/</loc>
-    <lastmod>2024-05-30</lastmod>
+    <lastmod>2024-06-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://angiean7.github.io/categories/QT/</loc>
-    <lastmod>2024-05-30</lastmod>
+    <lastmod>2024-06-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://angiean7.github.io/categories/Xilinx/</loc>
-    <lastmod>2024-05-30</lastmod>
+    <lastmod>2024-06-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://angiean7.github.io/categories/%E6%97%A5%E8%AF%AD/</loc>
-    <lastmod>2024-05-30</lastmod>
+    <lastmod>2024-06-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>

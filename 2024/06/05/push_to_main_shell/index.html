@@ -9,7 +9,7 @@
 
     <title>
         
-            C++ Union structure |
+            use shell to push to main |
         
         Angie An
     </title>
@@ -132,7 +132,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">C++ Union structure</span>
+            <span class="title-hover-animation">use shell to push to main</span>
         </div>
 
         
@@ -149,8 +149,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2023-12-15 11:21:29</span>
-        <span class="mobile">2023-12-15 11:21</span>
+        <span class="pc">2024-06-05 16:13:13</span>
+        <span class="mobile">2024-06-05 16:13</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -158,7 +158,7 @@
             <ul>
                 
                     <li>
-                        <a href="/categories/Linux-C/">Linux C</a>&nbsp;
+                        <a href="/categories/%E7%8E%AF%E5%A2%83/">环境</a>&nbsp;
                     </li>
                 
             </ul>
@@ -178,19 +178,8 @@
         
 
         <div class="article-content markdown-body">
-            <h1 id="C-The-union-Data-Structure"><a href="#C-The-union-Data-Structure" class="headerlink" title="C++ The union Data Structure"></a><strong>C++ The union Data Structure</strong></h1><p>A union is like a struct in that it generally has several fields, all of which are public by default. Unlike a struct, however, only one of the fields is used at any given time. </p>
-<p> In other words, it is a structure that allows the same storage space to be used to store values of different data types at different times. </p>
-<p>Unions can be used to conserve memory when a structure is needed in which several pieces of information of different types must be represented but only one will be used at a time, as when the components of a container must contain values of differing data types.</p>
-<p>The usual syntax for a union is illustrated by</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> <span class="title class_">Test</span>&#123;</span><br><span class="line">	<span class="keyword">struct</span>&#123;</span><br><span class="line">		<span class="type">int</span> x;</span><br><span class="line">		<span class="type">int</span> y;</span><br><span class="line">		<span class="type">int</span> z;</span><br><span class="line">	&#125;s;</span><br><span class="line">		<span class="type">int</span> k;</span><br><span class="line">&#125;myUnion;</span><br></pre></td></tr></table></figure>
+            <h1 id="use-shell-to-push-to-git"><a href="#use-shell-to-push-to-git" class="headerlink" title="use shell to push to git"></a>use shell to push to git</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$cat push_to_main.sh</span><br><span class="line"></span><br><span class="line">current_date=$(date +&quot;%Y-%m-%d&quot;)</span><br><span class="line">arg=$1</span><br><span class="line">commitment=$&#123;current_date&#125;$&#123;arg&#125;</span><br><span class="line"></span><br><span class="line">git add .</span><br><span class="line">git commit -m $commitment</span><br><span class="line">git push origin main</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	myUnion.s.x = <span class="number">4</span>;</span><br><span class="line">	myUnion.s.y = <span class="number">5</span>;</span><br><span class="line">	myUnion.s.z = <span class="number">6</span>;</span><br><span class="line">	myUnion.k = <span class="number">0</span>;</span><br><span class="line">	cout&lt;&lt; myUnion.s.x &lt;&lt;endl;</span><br><span class="line">	cout&lt;&lt; myUnion.s.y &lt;&lt;endl;</span><br><span class="line">	cout&lt;&lt; myUnion.s.z &lt;&lt;endl;</span><br><span class="line">	cout&lt;&lt; myUnion.k &lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>When the above code is executed, the program will output the following result</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
-
-<p>对k的赋值因为是union，要共享内存，所以从union的首地址开始放置，首地址开始的位置其实是x的位置，这样原来内存中x的位置就被k所赋的值代替了，就变为0了。</p>
-<p>And this is basically how union works. </p>
 
         </div>
 
@@ -201,29 +190,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2023/12/15/C-volatile%E7%94%A8%E6%B3%95/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">C volatile的用法及意义</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2023/12/15/Linux%201st%20module/"
+                           href="/2024/04/17/Kria%20KV260%20setup/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">Linux第一个驱动程序hello world编译</span>
+                                <span class="post-nav-title-item">Run Vitis AI Examples on KV260</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -440,7 +414,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C-The-union-Data-Structure"><span class="nav-text">C++ The union Data Structure</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#use-shell-to-push-to-git"><span class="nav-text">use shell to push to git</span></a></li></ol>
     </div>
 </div>
         </aside>

@@ -1,3 +1,4 @@
+https://angiean7.github.io/2024/06/05/push_to_main_shell/
 https://angiean7.github.io/2024/04/17/Kria%20KV260%20setup/
 https://angiean7.github.io/2024/04/01/Device%20Tree%20Memo/
 https://angiean7.github.io/2024/04/03/Typora+picgo+githubrepo/
@@ -26,12 +27,12 @@ https://angiean7.github.io/categories/index.html
 https://angiean7.github.io/tags/index.html
 https://angiean7.github.io/2023/12/15/I2C%E5%86%99%E5%85%A5EEPROM/
 https://angiean7.github.io/
-https://angiean7.github.io/categories/Linux-C/
 https://angiean7.github.io/categories/Windows/
-https://angiean7.github.io/categories/Linux/
+https://angiean7.github.io/categories/Linux-C/
 https://angiean7.github.io/categories/Linux-Kernel/
 https://angiean7.github.io/categories/Linux-drv/
 https://angiean7.github.io/categories/I2C/
+https://angiean7.github.io/categories/Linux/
 https://angiean7.github.io/categories/%E7%8E%AF%E5%A2%83/
 https://angiean7.github.io/categories/QT/
 https://angiean7.github.io/categories/Xilinx/
